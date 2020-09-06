@@ -23,7 +23,7 @@ export default function IndexPage({ postData }) {
 }
 
 export async function getStaticProps() {
-  const contentRoot = path.join(root, 'content')
+  const contentRoot = path.join(root, 'songs')
   const postData = fs.readdirSync(contentRoot).map((p) => {
     const content = fs.readFileSync(path.join(contentRoot, p), 'utf8')
     return {

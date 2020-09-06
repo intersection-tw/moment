@@ -5,14 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next-remote-watch ./content"
+    "start": "next-remote-watch ./songs"
   },
   "dependencies": {
+    "gray-matter": "^4.0.2",
     "next": "9.5.3",
     "next-mdx-remote": "^1.0.0",
-    "gray-matter": "^4.0.2",
     "next-remote-watch": "^0.2.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.8.0"
   }
 }
