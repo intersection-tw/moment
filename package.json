@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next-remote-watch ./content"
   },
   "dependencies": {
     "next": "9.5.3",
+    "next-mdx-remote": "^1.0.0",
+    "gray-matter": "^4.0.2",
+    "next-remote-watch": "^0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   }
