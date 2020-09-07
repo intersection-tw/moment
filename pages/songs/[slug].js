@@ -5,9 +5,18 @@ import fs from 'fs';
 import path from 'path';
 import GlobalStyles from '../../components/GlobalStyles';
 import MdxStyle from '../../components/MdxStyle';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+import { dawn, midnight } from '../../styles/color';
+import { familyDefault } from '../../styles/font';
 
 import Section from '../../components/Section';
+
+const SongBody = createGlobalStyle`
+  body {
+    background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  }
+`;
 
 const Article = styled.article`
   padding-right: 16px;
@@ -29,20 +38,32 @@ const Article = styled.article`
 `;
 
 const Meta = styled.section`
+  margin: 0 0 16px;
   padding: 0 16px;
+  font-family: ${familyDefault};
 `;
 
 const MetaTitle = styled.h1`
-  font-size: 2.4rem;
+  margin: 0;
+  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: ${36 / 28};
 `;
 
 const MetaYear = styled.span`
   display: inline-block;
+  margin-left: 8px;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
   font-size: 1.4rem;
+  font-weight: 300;
 `;
 
 const MetaArtist = styled.div`
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
   font-size: 1.6rem;
+  font-weight: 500;
+  line-height: ${24 / 16};
 `;
 
 const root = process.cwd()
@@ -54,6 +75,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   return (
     <>
       <GlobalStyles />
+      <SongBody />
       <MdxStyle>
         <Meta>
           <MetaTitle>

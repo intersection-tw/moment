@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { familyDefault } from '../styles/font';
 
 const Paragraph = styled.p`
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   font-family: ${ familyDefault };
   font-size: 1.6rem;
   font-weight: 400;
-  line-height: ${ 28 / 16};
+  line-height: ${ 24 / 16};
 `;
 
 function MdxStyle({ children }) {
