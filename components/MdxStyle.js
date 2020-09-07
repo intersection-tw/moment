@@ -15,8 +15,8 @@ const Paragraph = styled.p`
 function MdxStyle({ children }) {
   return(
     <MDXProvider
-    components={{
-      p: (props) => <Paragraph {...props} />
+      components={{
+        p: (props) => <Paragraph {...props} />
     }}>
       {children}
     </MDXProvider>

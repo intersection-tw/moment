@@ -7,6 +7,8 @@ import GlobalStyles from '../../components/GlobalStyles';
 import MdxStyle from '../../components/MdxStyle';
 import styled from 'styled-components';
 
+import Section from '../../components/Section';
+
 const Article = styled.article`
   padding-right: 16px;
   padding-left: 16px;
@@ -26,15 +28,40 @@ const Article = styled.article`
   }
 `;
 
+const Meta = styled.section`
+  padding: 0 16px;
+`;
+
+const MetaTitle = styled.h1`
+  font-size: 2.4rem;
+`;
+
+const MetaYear = styled.span`
+  display: inline-block;
+  font-size: 1.4rem;
+`;
+
+const MetaArtist = styled.div`
+  font-size: 1.6rem;
+`;
+
 const root = process.cwd()
 
 export default function BlogPost({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource)
+  const components = { Section }
+
+  const content = hydrate(mdxSource, { components })
   return (
     <>
       <GlobalStyles />
       <MdxStyle>
-        <h1>{frontMatter.title}</h1>
+        <Meta>
+          <MetaTitle>
+            {frontMatter.title}
+            <MetaYear>{frontMatter.year}</MetaYear>
+          </MetaTitle>
+          <MetaArtist>{frontMatter.artist}</MetaArtist>
+        </Meta>
         <Article>
           {content}
         </Article>
