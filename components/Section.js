@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { midnight } from '../styles/color';
 
 const SectionDiv = styled.div`
-  margin: 0 0 24px;
+  margin: 0 0 32px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
 `;
 

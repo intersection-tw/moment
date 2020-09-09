@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
@@ -38,7 +39,7 @@ const Article = styled.article`
 `;
 
 const Meta = styled.section`
-  margin: 0 0 16px;
+  margin: 0 0 24px;
   padding: 0 16px;
   font-family: ${familyDefault};
 `;
@@ -74,6 +75,9 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, { components })
   return (
     <>
+      <Head>
+        <title>{frontMatter.title} ({frontMatter.year})</title>
+      </Head>
       <GlobalStyles />
       <SongBody />
       <MdxStyle>
