@@ -8,6 +8,8 @@ import GlobalStyles from '../components/GlobalStyles';
 import { shade, dawn, midnight} from '../styles/color';
 import { familyDefault } from '../styles/font';
 
+import { Year } from '../components/meta/Year';
+
 const root = process.cwd()
 
 const IndexBody = createGlobalStyle`
@@ -33,11 +35,12 @@ const SongsList = styled.ul`
 `;
 
 const Song = styled.li`
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 `;
 
 const SongName = styled.a`
   display: inline-block;
+  padding: 4px 0;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2rem;
   line-height: ${ 30 / 20 };
@@ -52,14 +55,15 @@ export default function IndexPage({ postData }) {
       <h1>Moment</h1>
       <Section>
         <SongsList>
-
           { postData.map(data =>
-          <Song>
-            <Link href="/songs/[slug]" as={`/songs/${data.slug}`} passHref>
-              <SongName>{data.frontMatter.title}</SongName>
-            </Link>
-          </Song>
-          )}
+            <Song key={data.slug}>
+              <Link href="/songs/[slug]" as={`/songs/${data.slug}`} passHref>
+                  <SongName>{data.frontMatter.title}
+                    <Year>{data.frontMatter.year}</Year>
+                  </SongName>
+              </Link>
+            </Song>
+          ) }
         </SongsList>
       </Section>
     </>

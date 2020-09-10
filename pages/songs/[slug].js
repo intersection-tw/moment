@@ -12,6 +12,7 @@ import { dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
 import Section from '../../components/Section';
+import { Year } from '../../components/meta/Year';
 
 const SongBody = createGlobalStyle`
   body {
@@ -52,14 +53,6 @@ const MetaTitle = styled.h1`
   line-height: ${36 / 28};
 `;
 
-const MetaYear = styled.span`
-  display: inline-block;
-  margin-left: 8px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
-  font-size: 1.4rem;
-  font-weight: 300;
-`;
-
 const MetaArtist = styled.div`
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
   font-size: 1.6rem;
@@ -73,6 +66,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   const components = { Section }
 
   const content = hydrate(mdxSource, { components })
+  console.log((frontMatter.movies).split(', '));
   return (
     <>
       <Head>
@@ -84,7 +78,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <Meta>
           <MetaTitle>
             {frontMatter.title}
-            <MetaYear>{frontMatter.year}</MetaYear>
+            <Year>{frontMatter.year}</Year>
           </MetaTitle>
           <MetaArtist>{frontMatter.artist}</MetaArtist>
         </Meta>
