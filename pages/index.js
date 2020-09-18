@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import Head from 'next/head';
 import Link from 'next/link';
 import styled, { createGlobalStyle } from 'styled-components';
+import Seo from '../components/Seo';
 import GlobalStyles from '../components/GlobalStyles';
 
 import { shade, dawn, midnight} from '../styles/color';
@@ -16,6 +18,25 @@ const IndexBody = createGlobalStyle`
   body {
     background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.i}%);
   }
+`;
+
+const IndexTitleGroup = styled.hgroup`
+  margin: 0 16px 16px;
+  padding-top: 16px;
+  font-family: ${familyDefault};
+`;
+
+const Title = styled.h1`
+  margin: 0 0 4px;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  font-size: 3.2rem;
+`;
+
+const TitleDescription = styled.h2`
+  margin: 0;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-size: 1.4rem;
+  font-weight: 400;
 `;
 
 const Section = styled.section`
@@ -50,9 +71,18 @@ const SongName = styled.a`
 export default function IndexPage({ postData }) {
   return (
     <>
+      <Seo title="Moment"
+           description="看電影看劇時，聽到喜歡的音樂"
+           published=""
+           modified=""
+           artist={process.env.NEXT_PUBLIC_AUTHOR}
+      />
       <GlobalStyles />
       <IndexBody />
-      <h1>Moment</h1>
+      <IndexTitleGroup>
+        <Title>The Moment</Title>
+        <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
+      </IndexTitleGroup>
       <Section>
         <SongsList>
           { postData.map(data =>
