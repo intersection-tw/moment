@@ -7,6 +7,7 @@ import path from 'path';
 import GlobalStyles from '../../components/GlobalStyles';
 import MdxStyle from '../../components/MdxStyle';
 import styled, { createGlobalStyle } from 'styled-components';
+import Seo from '../../components/Seo';
 
 import { dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
@@ -66,12 +67,22 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   const components = { Section }
 
   const content = hydrate(mdxSource, { components })
-  console.log((frontMatter.movies).split(', '));
+
+  const songDescription = `出現在 ${frontMatter.movies}。`;
+  const releaseTime = new Date(frontMatter.release);
+  
   return (
     <>
       <Head>
         <title>{frontMatter.title} ({frontMatter.year})</title>
       </Head>
+      <Seo slug={frontMatter.slug}
+           title={frontMatter.title}
+           description={songDescription}
+           published={releaseTime.toISOString()}
+           modified={``}
+           artist={frontMatter.artist}
+      />
       <GlobalStyles />
       <SongBody />
       <MdxStyle>
