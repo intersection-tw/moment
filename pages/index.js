@@ -55,17 +55,23 @@ const SongsList = styled.ul`
   padding: 0;
 `;
 
-const Song = styled.li`
+const SongItem = styled.li`
   margin-bottom: 12px;
 `;
 
-const SongName = styled.a`
+const Song = styled.a`
   display: inline-block;
   padding: 4px 0;
+  text-decoration: none;
+`;
+
+const SongName = styled.span`
+  display: inline-block;
+  margin-right: 8px;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2rem;
   line-height: ${ 30 / 20 };
-  text-decoration: none;
+  vertical-align: baseline;
 `;
 
 export default function IndexPage({ postData }) {
@@ -86,13 +92,14 @@ export default function IndexPage({ postData }) {
       <Section>
         <SongsList>
           { postData.map(data =>
-            <Song key={data.slug}>
+            <SongItem key={data.slug}>
               <Link href="/songs/[slug]" as={`/songs/${data.slug}`} passHref>
-                  <SongName>{data.frontMatter.title}
-                    <Year>{data.frontMatter.year}</Year>
-                  </SongName>
+                <Song>
+                  <SongName>{data.frontMatter.title}</SongName>
+                  <Year>{data.frontMatter.year}</Year>
+                </Song>
               </Link>
-            </Song>
+            </SongItem>
           ) }
         </SongsList>
       </Section>
