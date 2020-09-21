@@ -68,6 +68,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
   const content = hydrate(mdxSource, { components })
 
+  // const songTitle = ``;
   const songDescription = `出現在 ${frontMatter.movies}。`;
   const releaseTime = new Date(frontMatter.release);
   

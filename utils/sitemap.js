@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
+const prettier = require('prettier');
 
 const root = process.cwd();
 const contentRoot = path.join(root, 'songs');
 const songs = fs.readdirSync(contentRoot);
 
 (async () => {
+  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -16,12 +19,17 @@ const songs = fs.readdirSync(contentRoot);
             return `
               <url>
                 <loc>${`https://moment.intersection.tw/${path}`}</loc>
-              </url>
-            `;
+              </url>`
+            ;
           })
           .join('')}
     </urlset>
   `;
 
-  fs.writeFileSync('public/sitemap.xml', sitemap);
+  const sitemapFormatted = prettier.format(sitemap, {
+    ...prettierConfig,
+    parser: 'html'
+  });
+
+  fs.writeFileSync('public/sitemap.xml', sitemapFormatted);
 })();
