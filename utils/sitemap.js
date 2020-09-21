@@ -15,7 +15,7 @@ const songs = fs.readdirSync(contentRoot);
               .replace('.mdx', '');
             return `
               <url>
-                <loc>${`https://moment.intersection.tw${path}`}</loc>
+                <loc>${`https://moment.intersection.tw/${path}`}</loc>
               </url>
             `;
           })
@@ -23,5 +23,5 @@ const songs = fs.readdirSync(contentRoot);
     </urlset>
   `;
 
-  fs.writeFileSync('public/sitemap.xml');
+  fs.writeFileSync('public/sitemap.xml', sitemap);
 })();
