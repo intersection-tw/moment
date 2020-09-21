@@ -12,7 +12,7 @@ import { familyDefault } from '../styles/font';
 
 import { Year } from '../components/meta/Year';
 
-const root = process.cwd()
+const root = process.cwd();
 
 const IndexBody = createGlobalStyle`
   body {
