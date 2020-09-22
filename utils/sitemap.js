@@ -13,6 +13,9 @@ const songs = fs.readdirSync(songsRoot);
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+          <loc>https://moment.intersection.tw</loc>
+        </url>
         ${songs
           .map((song) => {
             const path = song
