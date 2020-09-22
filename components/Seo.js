@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head'
 
 function Seo({slug, title, description, published, modified, artist}) {
-  const canonical = `${process.env.NEXT_PUBLIC_HOSTNAME}${slug || ''}`;
+  const canonical = `${process.env.NEXT_PUBLIC_HOSTNAME}${slug? `/songs/${slug}` : ''}`;
   const ogCover = slug || 'index';
 
   const publishedTime = new Date(published).toISOString();
@@ -33,7 +33,7 @@ function Seo({slug, title, description, published, modified, artist}) {
             datePublished: publishedTime,
             dateModified: modifiedTime,
             author: {
-              '@type': 'Organizarion',
+              '@type': 'Organization',
               name: 'Intersection'
             }
           }]

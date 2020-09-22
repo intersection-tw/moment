@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
@@ -64,6 +65,8 @@ const MetaArtist = styled.div`
 const root = process.cwd()
 
 export default function BlogPost({ mdxSource, frontMatter }) {
+  const router = useRouter();
+
   const components = { Section }
 
   const content = hydrate(mdxSource, { components })
@@ -76,7 +79,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
       <Head>
         <title>{songTitle}</title>
       </Head>
-      <Seo slug={frontMatter.slug}
+      <Seo slug={router.query.slug}
            title={songTitle}
            description={songDescription}
            published={frontMatter.published}
@@ -113,7 +116,8 @@ export async function getStaticProps({ params }) {
     path.join(root, 'songs', `${params.slug}.mdx`),
     'utf8'
   )
-  const { data, content } = matter(source)
+  const { data, content } = matter(source);
+
   const mdxSource = await renderToString(content)
   return { props: { mdxSource, frontMatter: data } }
 }

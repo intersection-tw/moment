@@ -28,13 +28,13 @@ const IndexTitleGroup = styled.hgroup`
 
 const Title = styled.h1`
   margin: 0 0 4px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
   font-size: 3.2rem;
 `;
 
 const TitleDescription = styled.h2`
   margin: 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
   font-size: 1.4rem;
   font-weight: 400;
 `;
