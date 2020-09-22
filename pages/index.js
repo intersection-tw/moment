@@ -75,6 +75,8 @@ const SongName = styled.span`
 `;
 
 export default function IndexPage({ postData }) {
+  // const artists = postData.map(data => {data.frontMatter.artist});
+  // console.log(artists);
   return (
     <>
       <Seo title="看電影看劇時，聽到喜歡的音樂 - Moment"
