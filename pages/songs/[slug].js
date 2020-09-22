@@ -68,16 +68,16 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
   const content = hydrate(mdxSource, { components })
 
-  // const songTitle = ``;
-  const songDescription = `出現在 ${frontMatter.movies}。`;
+  const songTitle = `${frontMatter.artist} 的 ${frontMatter.title} 歌詞`;
+  const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.movies}。`;
 
   return (
     <>
       <Head>
-        <title>{frontMatter.title} ({frontMatter.year})</title>
+        <title>{songTitle}</title>
       </Head>
       <Seo slug={frontMatter.slug}
-           title={frontMatter.title}
+           title={songTitle}
            description={songDescription}
            published={frontMatter.published}
            modified={frontMatter.modified}

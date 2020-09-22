@@ -33,8 +33,8 @@ function Seo({slug, title, description, published, modified, artist}) {
             datePublished: publishedTime,
             dateModified: modifiedTime,
             author: {
-              '@type': 'Person',
-              name: artist
+              '@type': 'Organizarion',
+              name: 'Intersection'
             }
           }]
         })
