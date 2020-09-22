@@ -77,10 +77,10 @@ const SongName = styled.span`
 export default function IndexPage({ postData }) {
   return (
     <>
-      <Seo title="Moment"
-           description="看電影看劇時，聽到喜歡的音樂"
-           published=""
-           modified=""
+      <Seo title="看電影看劇時，聽到喜歡的音樂 - Moment"
+           description="讓電影、日美劇致敬的經典歌曲歌詞"
+           published="2020-09-21"
+           modified="2020-09-22"
            artist={process.env.NEXT_PUBLIC_AUTHOR}
       />
       <GlobalStyles />
@@ -91,7 +91,7 @@ export default function IndexPage({ postData }) {
       </IndexTitleGroup>
       <Section>
         <SongsList>
-          { postData.map(data =>
+          {postData.map(data =>
             <SongItem key={data.slug}>
               <Link href="/songs/[slug]" as={`/songs/${data.slug}`} passHref>
                 <Song>
@@ -100,7 +100,7 @@ export default function IndexPage({ postData }) {
                 </Song>
               </Link>
             </SongItem>
-          ) }
+          )}
         </SongsList>
       </Section>
     </>

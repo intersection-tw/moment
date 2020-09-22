@@ -3,8 +3,9 @@ const path = require('path');
 const prettier = require('prettier');
 
 const root = process.cwd();
-const contentRoot = path.join(root, 'songs');
-const songs = fs.readdirSync(contentRoot);
+// const pageRoot = path.join(root, 'pages');
+const songsRoot = path.join(root, 'songs');
+const songs = fs.readdirSync(songsRoot);
 
 (async () => {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');

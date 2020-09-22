@@ -70,8 +70,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
   // const songTitle = ``;
   const songDescription = `出現在 ${frontMatter.movies}。`;
-  const releaseTime = new Date(frontMatter.release);
-  
+
   return (
     <>
       <Head>
@@ -80,8 +79,8 @@ export default function BlogPost({ mdxSource, frontMatter }) {
       <Seo slug={frontMatter.slug}
            title={frontMatter.title}
            description={songDescription}
-           published={releaseTime.toISOString()}
-           modified={``}
+           published={frontMatter.published}
+           modified={frontMatter.modified}
            artist={frontMatter.artist}
       />
       <GlobalStyles />

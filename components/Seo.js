@@ -3,7 +3,10 @@ import Head from 'next/head'
 
 function Seo({slug, title, description, published, modified, artist}) {
   const canonical = `${process.env.NEXT_PUBLIC_HOSTNAME}${slug || ''}`;
-  const ogCover = slug || 'index.jpg';
+  const ogCover = slug || 'index';
+
+  const publishedTime = new Date(published).toISOString();
+  const modifiedTime = new Date(modified).toISOString();
 
   return(
     <Head>
@@ -15,7 +18,7 @@ function Seo({slug, title, description, published, modified, artist}) {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/og/${ogCover}`} />
+      <meta property="og:image" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/og/${ogCover}.jpg`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:
@@ -27,8 +30,8 @@ function Seo({slug, title, description, published, modified, artist}) {
             '@type': 'WebPage',
             url: canonical,
             name: title,
-            datePublished: published,
-            dateModified: modified,
+            datePublished: publishedTime,
+            dateModified: modifiedTime,
             author: {
               '@type': 'Person',
               name: artist

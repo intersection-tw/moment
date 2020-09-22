@@ -34,6 +34,20 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+
+          { process.env.NODE_ENV == 'production' &&
+            <>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQLC3JDW6W" />
+              <script
+                dangerouslySetInnerHTML={{
+                    __html: `window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-DQLC3JDW6W');`
+                  }}
+              />
+            </>
+          }
         </Head>
         <body>
           <Main />
