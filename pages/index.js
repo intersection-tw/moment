@@ -75,8 +75,8 @@ const SongName = styled.span`
 `;
 
 export default function IndexPage({ postData }) {
-  // const artists = postData.map(data => {data.frontMatter.artist});
-  // console.log(artists);
+  const artists = [...new Set(postData.map(data => { return data.frontMatter.artist}))];
+
   return (
     <>
       <Seo title="看電影看劇時，聽到喜歡的音樂 - Moment"
@@ -92,18 +92,35 @@ export default function IndexPage({ postData }) {
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
       </IndexTitleGroup>
       <Section>
-        <SongsList>
-          {postData.map(data =>
-            <SongItem key={data.slug}>
-              <Link href="/songs/[slug]" as={`/songs/${data.slug}`} passHref>
-                <Song>
-                  <SongName>{data.frontMatter.title}</SongName>
-                  <Year>{data.frontMatter.year}</Year>
-                </Song>
-              </Link>
-            </SongItem>
-          )}
-        </SongsList>
+        {
+          artists.map(artist => {
+            const songsofArtist = postData.filter(song => {
+              return song.frontMatter.artist === artist
+            })
+            
+            const songs = songsofArtist.map(s => {
+              return(
+                <SongItem key={s.slug}>
+                  <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
+                    <Song>
+                      <SongName>{s.frontMatter.title}</SongName>
+                      <Year>{s.frontMatter.year}</Year>
+                    </Song>
+                  </Link>
+                </SongItem>
+              );
+            });
+
+            return(
+              <>
+                <h2>{artist}</h2>
+                <SongsList>
+                  {songs}
+                </SongsList>
+              </>
+            );
+          })
+        }
       </Section>
     </>
   )
