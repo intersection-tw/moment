@@ -12,6 +12,9 @@ import { familyDefault } from '../styles/font';
 
 import { Year } from '../components/meta/Year';
 
+import { LayoutSection } from '../components/LayoutSection';
+import Footer from '../components/Footer';
+
 const root = process.cwd();
 
 const IndexBody = createGlobalStyle`
@@ -30,6 +33,7 @@ const Title = styled.h1`
   margin: 0 0 4px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
   font-size: 3.2rem;
+  font-weight: 500;
 `;
 
 const TitleDescription = styled.h2`
@@ -39,24 +43,29 @@ const TitleDescription = styled.h2`
   font-weight: 400;
 `;
 
-const Section = styled.section`
-  margin-bottom: 32px;
+const SongsIndex = styled(LayoutSection)`
   padding: 0 16px;
   font-family: ${familyDefault};
 `;
 
 const ArtistName = styled.h2`
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-weight: 400;
 `;
 
 const SongsList = styled.ul`
-  margin: 0;
+  margin: 0 0 16px;
   padding: 0;
+
+  :last-of-type {
+    margin: 0;
+  }
 `;
 
 const SongItem = styled.li`
   margin-bottom: 12px;
+  list-style: none;
 `;
 
 const Song = styled.a`
@@ -91,7 +100,7 @@ export default function IndexPage({ postData }) {
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
       </IndexTitleGroup>
-      <Section>
+      <SongsIndex>
         {
           artists.map(artist => {
             const songsofArtist = postData.filter(song => {
@@ -113,7 +122,7 @@ export default function IndexPage({ postData }) {
 
             return(
               <>
-                <h2>{artist}</h2>
+                <ArtistName>{artist}</ArtistName>
                 <SongsList>
                   {songs}
                 </SongsList>
@@ -121,7 +130,8 @@ export default function IndexPage({ postData }) {
             );
           })
         }
-      </Section>
+      </SongsIndex>
+      <Footer />
     </>
   )
 }

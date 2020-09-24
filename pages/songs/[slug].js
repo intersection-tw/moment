@@ -13,8 +13,10 @@ import Seo from '../../components/Seo';
 import { dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
-import Section from '../../components/Section';
+import { LyricSection } from '../../components/LyricSection';
 import { Year } from '../../components/meta/Year';
+
+import Footer from '../../components/Footer';
 
 const SongBody = createGlobalStyle`
   body {
@@ -67,7 +69,7 @@ const root = process.cwd()
 export default function BlogPost({ mdxSource, frontMatter }) {
   const router = useRouter();
 
-  const components = { Section }
+  const components = { LyricSection }
 
   const content = hydrate(mdxSource, { components })
 
@@ -92,14 +94,15 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <Meta>
           <MetaTitle>
             {frontMatter.title}
-            <Year>{frontMatter.year}</Year>
           </MetaTitle>
+          <Year>{frontMatter.year}</Year>
           <MetaArtist>{frontMatter.artist}</MetaArtist>
         </Meta>
         <Article>
           {content}
         </Article>
       </MdxStyle>
+      <Footer />
     </>
   )
 }
