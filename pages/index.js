@@ -88,11 +88,15 @@ export default function IndexPage({ postData }) {
     return data.frontMatter.artist
   }))];
 
-  const indexLinks = postData.map(data => {
-    return data.slug
+  const indexLinksSchema = postData.map((data, index) => {
+    return(
+      {
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${process.env.NEXT_PUBLIC_HOSTNAME}/songs/${data.slug}`
+      }
+    )
   });
-
-  console.log(indexLinks)
 
   return (
     <>
@@ -102,6 +106,20 @@ export default function IndexPage({ postData }) {
            modified="2020-09-22"
            artist={process.env.NEXT_PUBLIC_AUTHOR}
       />
+      <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:
+          JSON.stringify
+          ({
+            '@context': 'https://schema.org',
+            "@type": "ItemList",
+              "itemListElement":
+              [
+                indexLinksSchema
+              ]
+          })
+        }}
+        />
+      </Head>
       <GlobalStyles />
       <IndexBody />
       <IndexTitleGroup>
