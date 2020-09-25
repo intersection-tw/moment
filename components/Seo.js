@@ -34,9 +34,17 @@ function Seo({slug, title, description, published, modified, artist, links}) {
           name: title,
           datePublished: publishedTime,
           dateModified: modifiedTime,
-          author: {
+          publisher: {
             '@type': 'Organization',
-            name: 'Intersection'
+            name: 'Intersection',
+            url: 'https://intersection.tw',
+            logo: {
+              '@type': 'ImageObject',
+              name: 'Intersection: 優化、插件、高清、視頻、反饋、交互設計：已經看膩這些中國網路媒體用語。',
+              width: 400,
+              height: 400,
+              url: 'https://moment.intersection.tw/images/intersection.png'
+            }
           }
         })
       }}
