@@ -17,8 +17,9 @@ function Seo({slug, title, description, published, modified, artist, links}) {
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
+      <link rel="icon" type="image/ico" sizes="16x16" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
