@@ -13,7 +13,7 @@ import Seo from '../../components/Seo';
 import { dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
-import { LyricSection } from '../../components/LyricSection';
+import { LayoutSection, LyricSection } from '../../components/Section';
 import { Year } from '../../components/meta/Year';
 
 import Footer from '../../components/Footer';
@@ -64,6 +64,23 @@ const MetaArtist = styled.div`
   line-height: ${24 / 16};
 `;
 
+const HeardListTitle = styled.h2`
+  margin: 0 0 8px;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  font-size: 1.8rem;
+`;
+
+const HeardList = styled.ul`
+  padding: 0;
+`;
+
+const HeardItem = styled.li`
+  margin: 0 0 8px;
+  padding: 0;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  list-style: none;
+`;
+
 const root = process.cwd()
 
 export default function BlogPost({ mdxSource, frontMatter }) {
@@ -75,6 +92,14 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
   const songTitle = `${frontMatter.artist} 的 ${frontMatter.title} 歌詞`;
   const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.heard}。`;
+
+  const heardListData = frontMatter.heard.split('、').map(video => {
+    return (
+      <HeardItem>{video}</HeardItem>
+    )
+  });
+
+  console.log(heardListData)
 
   return (
     <>
@@ -101,6 +126,12 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <Article>
           {content}
         </Article>
+        <LayoutSection>
+          <HeardListTitle>出現在</HeardListTitle>
+          <HeardList>
+            {heardListData}
+          </HeardList>
+        </LayoutSection>
       </MdxStyle>
       <Footer />
     </>

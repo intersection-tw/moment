@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import { midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
-import { LayoutSection } from './LayoutSection';
+import { LayoutSection } from './Section';
 
 const FooterContainer = styled(LayoutSection)`
-  padding: 0 16px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
 `;

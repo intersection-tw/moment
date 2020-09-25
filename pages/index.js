@@ -12,7 +12,7 @@ import { familyDefault } from '../styles/font';
 
 import { Year } from '../components/meta/Year';
 
-import { LayoutSection } from '../components/LayoutSection';
+import { LayoutSection } from '../components/Section';
 import Footer from '../components/Footer';
 
 const root = process.cwd();
@@ -44,7 +44,6 @@ const TitleDescription = styled.h2`
 `;
 
 const SongsIndex = styled(LayoutSection)`
-  padding: 0 16px;
   font-family: ${familyDefault};
 `;
 
