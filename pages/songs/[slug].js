@@ -74,7 +74,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, { components })
 
   const songTitle = `${frontMatter.artist} 的 ${frontMatter.title} 歌詞`;
-  const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.movies}。`;
+  const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.heard}。`;
 
   return (
     <>

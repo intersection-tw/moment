@@ -84,7 +84,15 @@ const SongName = styled.span`
 `;
 
 export default function IndexPage({ postData }) {
-  const artists = [...new Set(postData.map(data => { return data.frontMatter.artist}))];
+  const artists = [...new Set(postData.map(data => {
+    return data.frontMatter.artist
+  }))];
+
+  const indexLinks = postData.map(data => {
+    return data.slug
+  });
+
+  console.log(indexLinks)
 
   return (
     <>

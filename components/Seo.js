@@ -1,17 +1,21 @@
 import React from 'react';
 import Head from 'next/head'
 
-function Seo({slug, title, description, published, modified, artist}) {
+function Seo({slug, title, description, published, modified, artist, links}) {
   const canonical = `${process.env.NEXT_PUBLIC_HOSTNAME}${slug? `/songs/${slug}` : ''}`;
   const ogCover = slug || 'index';
 
   const publishedTime = new Date(published).toISOString();
   const modifiedTime = new Date(modified).toISOString();
 
+  // const indexLinks = links.map(link => {
+
+  // });
+
   return(
     <Head>
       <title>{title}</title>
-      <meta property="description" content={description} />
+      <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
@@ -25,18 +29,15 @@ function Seo({slug, title, description, published, modified, artist}) {
         JSON.stringify
         ({
           '@context': 'https://schema.org',
-          '@graph':
-          [{
-            '@type': 'WebPage',
-            url: canonical,
-            name: title,
-            datePublished: publishedTime,
-            dateModified: modifiedTime,
-            author: {
-              '@type': 'Organization',
-              name: 'Intersection'
-            }
-          }]
+          '@type': 'WebPage',
+          url: canonical,
+          name: title,
+          datePublished: publishedTime,
+          dateModified: modifiedTime,
+          author: {
+            '@type': 'Organization',
+            name: 'Intersection'
+          }
         })
       }}
       />
