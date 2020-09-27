@@ -3,7 +3,6 @@ const path = require('path');
 const prettier = require('prettier');
 
 const root = process.cwd();
-// const pageRoot = path.join(root, 'pages');
 const songsRoot = path.join(root, 'songs');
 const songs = fs.readdirSync(songsRoot);
 

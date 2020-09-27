@@ -1,8 +1,10 @@
 export const shade = {
-  h: 16,
-  s: 12,
+  h: 208,
+  s: 32,
   l: {
-    i: 6
+    i: 6,
+    iii: 20,
+    x: 72
   }
 };
 
@@ -17,6 +19,7 @@ export const midnight = {
   s: 26,
   l: {
     i: 16,
+    iii: 32,
     vii: 56,
     xi: 80,
     xvi: 92

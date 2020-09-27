@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
@@ -10,7 +11,7 @@ import MdxStyle from '../../components/MdxStyle';
 import styled, { createGlobalStyle } from 'styled-components';
 import Seo from '../../components/Seo';
 
-import { dawn, midnight } from '../../styles/color';
+import { shade, dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
 import { LayoutSection, LyricSection } from '../../components/Section';
@@ -41,6 +42,36 @@ const Article = styled.article`
     padding-right:0;
     padding-left:0;
   }
+`;
+
+const Breadcrumb = styled.nav`
+  margin-bottom: 16px;
+  padding: 0 16px;
+  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.iii}%);
+`;
+
+const BreadcrumbList = styled.ul`
+  display: flex;
+  margin: 0;
+  padding: 0;
+`;
+
+const BreadcrumbItem = styled.li`
+  margin: 0;
+  padding: 2px 0;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
+  font-family: ${familyDefault};
+  font-size: 1.4rem;
+  line-height: ${32 / 14};
+  list-style: none;
+`;
+
+const BreadcrumbItemLink = styled.a`
+  display: inline-block;
+  margin-left: -8px;
+  padding: 0 8px;
+  color: inherit;
+  text-decoration: none;
 `;
 
 const Meta = styled.section`
@@ -78,6 +109,7 @@ const HeardItem = styled.li`
   margin: 0 0 8px;
   padding: 0;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  font-size: 1.4rem;
   list-style: none;
 `;
 
@@ -99,8 +131,6 @@ export default function BlogPost({ mdxSource, frontMatter }) {
     )
   });
 
-  console.log(heardListData)
-
   return (
     <>
       <Head>
@@ -116,6 +146,16 @@ export default function BlogPost({ mdxSource, frontMatter }) {
       <GlobalStyles />
       <SongBody />
       <MdxStyle>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <Link href="/" passHref>
+                <BreadcrumbItemLink>首頁 &gt;</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>{frontMatter.artist}</BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <Meta>
           <MetaTitle>
             {frontMatter.title}
