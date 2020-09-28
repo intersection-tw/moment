@@ -101,20 +101,17 @@ const MetaArtist = styled.div`
   line-height: ${24 / 16};
 `;
 
-const Heard = styled(LayoutSection)`
-  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
-`;
-
 const HeardTitle = styled.h2`
   margin: 0 0 8px;
   padding: 8px 0 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.iii}%);
-  font-size: 1.8rem;
+  color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
+  font-size: 1.6rem;
 `;
 
 const HeardList = styled.ul`
   margin: 0;
-  padding: 0 0 4px;
+  padding: 0 8px;
+  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
 `;
 
 const HeardItem = styled.li`
@@ -178,12 +175,12 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <Article>
           {content}
         </Article>
-        <Heard>
-          <HeardTitle>出現在</HeardTitle>
+        <LayoutSection>
+          <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
           <HeardList>
             {heardListData}
           </HeardList>
-        </Heard>
+        </LayoutSection>
       </MdxStyle>
       <Footer />
     </>
