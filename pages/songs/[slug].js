@@ -174,7 +174,6 @@ export default function BlogPost({ mdxSource, frontMatter }) {
             {frontMatter.title}
           </MetaTitle>
           <Year>{frontMatter.year}</Year>
-          <MetaArtist>{frontMatter.artist}</MetaArtist>
         </Meta>
         <Article>
           {content}
