@@ -160,7 +160,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
           <BreadcrumbList>
             <BreadcrumbItem>
               <Link href="/" passHref>
-                <BreadcrumbItemLink>首頁 &gt;</BreadcrumbItemLink>
+                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
               </Link>
             </BreadcrumbItem>
             <BreadcrumbItem>{frontMatter.artist}</BreadcrumbItem>
