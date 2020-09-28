@@ -45,9 +45,15 @@ const Article = styled.article`
 `;
 
 const Breadcrumb = styled.nav`
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
   margin-bottom: 16px;
   padding: 0 16px;
-  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.iii}%);
+  background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
+  backdrop-filter: blur(20px);
+  z-index: 1;
 `;
 
 const BreadcrumbList = styled.ul`
@@ -95,21 +101,28 @@ const MetaArtist = styled.div`
   line-height: ${24 / 16};
 `;
 
-const HeardListTitle = styled.h2`
+const Heard = styled(LayoutSection)`
+  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
+`;
+
+const HeardTitle = styled.h2`
   margin: 0 0 8px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  padding: 8px 0 0;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.iii}%);
   font-size: 1.8rem;
 `;
 
 const HeardList = styled.ul`
-  padding: 0;
+  margin: 0;
+  padding: 0 0 4px;
 `;
 
 const HeardItem = styled.li`
-  margin: 0 0 8px;
+  margin: 0;
   padding: 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.iii}%);
   font-size: 1.4rem;
+  line-height: ${32 / 14};
   list-style: none;
 `;
 
@@ -166,12 +179,12 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <Article>
           {content}
         </Article>
-        <LayoutSection>
-          <HeardListTitle>出現在</HeardListTitle>
+        <Heard>
+          <HeardTitle>出現在</HeardTitle>
           <HeardList>
             {heardListData}
           </HeardList>
-        </LayoutSection>
+        </Heard>
       </MdxStyle>
       <Footer />
     </>
