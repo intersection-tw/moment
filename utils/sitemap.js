@@ -21,7 +21,7 @@ const songs = fs.readdirSync(songsRoot);
               .replace('.mdx', '');
             return `
               <url>
-                <loc>${`https://moment.intersection.tw/${path}`}</loc>
+                <loc>${`https://moment.intersection.tw/songs/${path}`}</loc>
               </url>`
             ;
           })
