@@ -125,7 +125,7 @@ const HeardItem = styled.li`
 
 const root = process.cwd()
 
-export default function BlogPost({ mdxSource, frontMatter }) {
+export default function SongTemplate({ mdxSource, frontMatter }) {
   const router = useRouter();
 
   const components = { LyricSection }
