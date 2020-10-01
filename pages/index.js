@@ -48,6 +48,7 @@ const SongsIndex = styled(LayoutSection)`
 `;
 
 const ArtistName = styled.h2`
+  display: inline-block;
   margin: 0 0 6px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
   font-weight: 400;
@@ -82,9 +83,9 @@ const SongName = styled.span`
   vertical-align: baseline;
 `;
 
-export default function IndexPage({ postData }) {
-  const artists = [...new Set(postData.map(data => {
-    return data.frontMatter.artist
+export default function IndexPage({ artistData, postData }) {
+  const artists = [...new Set(artistData.map(data => {
+    return data.frontMatter.fullname
   }))];
 
   const indexLinksSchema = postData.map((data, index) => {
@@ -162,14 +163,23 @@ export default function IndexPage({ postData }) {
 }
 
 export async function getStaticProps() {
-  const contentRoot = path.join(root, 'songs');
-  const postData = fs.readdirSync(contentRoot).map((p) => {
-    const content = fs.readFileSync(path.join(contentRoot, p), 'utf8');
+  const artistsRoot = path.join(root, 'artists');
+  const artistData = fs.readdirSync(artistsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(artistsRoot, p), 'utf8');
+    return {
+      slug: p.replace(/\.mdx/, ''),
+      frontMatter: matter(content).data,
+    }
+  })
+
+  const songsRoot = path.join(root, 'songs');
+  const postData = fs.readdirSync(songsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(songsRoot, p), 'utf8');
     return {
       slug: p.replace(/\.mdx/, ''),
       content,
       frontMatter: matter(content).data,
     }
   })
-  return { props: { postData } }
+  return { props: { artistData, postData } }
 };

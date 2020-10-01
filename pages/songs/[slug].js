@@ -17,6 +17,7 @@ import { familyDefault } from '../../styles/font';
 import { LayoutSection, LyricSection } from '../../components/Section';
 import { Year } from '../../components/meta/Year';
 
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import Footer from '../../components/Footer';
 
 const SongBody = createGlobalStyle`
@@ -42,42 +43,6 @@ const Article = styled.article`
     padding-right:0;
     padding-left:0;
   }
-`;
-
-const Breadcrumb = styled.nav`
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-bottom: 16px;
-  padding: 0 16px;
-  background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
-  backdrop-filter: blur(20px);
-  z-index: 1;
-`;
-
-const BreadcrumbList = styled.ul`
-  display: flex;
-  margin: 0;
-  padding: 0;
-`;
-
-const BreadcrumbItem = styled.li`
-  margin: 0;
-  padding: 2px 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
-  font-family: ${familyDefault};
-  font-size: 1.4rem;
-  line-height: ${32 / 14};
-  list-style: none;
-`;
-
-const BreadcrumbItemLink = styled.a`
-  display: inline-block;
-  margin-left: -8px;
-  padding: 0 8px;
-  color: inherit;
-  text-decoration: none;
 `;
 
 const Meta = styled.section`
@@ -163,7 +128,11 @@ export default function SongTemplate({ mdxSource, frontMatter }) {
                 <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
               </Link>
             </BreadcrumbItem>
-            <BreadcrumbItem>{frontMatter.artist}</BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+                <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <Meta>
@@ -186,21 +155,24 @@ export default function SongTemplate({ mdxSource, frontMatter }) {
     </>
   )
 }
+
 export async function getStaticPaths() {
   return {
     fallback: false,
     paths: fs
-      .readdirSync(path.join(root, 'songs'))
-      .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
+    .readdirSync(path.join(root, 'songs'))
+    .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
   }
 }
+
 export async function getStaticProps({ params }) {
-  const source = fs.readFileSync(
+  const songSource = fs.readFileSync(
     path.join(root, 'songs', `${params.slug}.mdx`),
     'utf8'
-  )
-  const { data, content } = matter(source);
+  );
 
-  const mdxSource = await renderToString(content)
+  const { data, content } = matter(songSource);
+  const mdxSource = await renderToString(content);
+
   return { props: { mdxSource, frontMatter: data } }
 }

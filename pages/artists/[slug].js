@@ -9,12 +9,32 @@ import renderToString from 'next-mdx-remote/render-to-string';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import Seo from '../../components/Seo';
+import GlobalStyles from '../../components/GlobalStyles';
+
+import { shade, dawn, midnight } from '../../styles/color';
+import { familyDefault } from '../../styles/font';
+
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
+import Footer from '../../components/Footer';
+
+const ArtistBody = createGlobalStyle`
+  body {
+    background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  }
+`;
 
 const root = process.cwd()
 
 export default function ArtistTemplate({ mdxSource, frontMatter }) {
+  const artistTitle = `電視影劇裡出現過的 ${frontMatter.fullname} 歌曲`
+
   return(
     <>
+      <Head>
+        <title>{artistTitle}</title>
+      </Head>
+      <GlobalStyles />
+      <ArtistBody />
       {frontMatter.fullname}
     </>
   )
@@ -28,13 +48,15 @@ export async function getStaticPaths() {
       .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
   }
 }
+
 export async function getStaticProps({ params }) {
   const source = fs.readFileSync(
     path.join(root, 'artists', `${params.slug}.mdx`),
     'utf8'
   )
-  const { data, content } = matter(source);
 
-  const mdxSource = await renderToString(content)
+  const { data, content } = matter(source);
+  const mdxSource = await renderToString(content);
+
   return { props: { mdxSource, frontMatter: data } }
 }
