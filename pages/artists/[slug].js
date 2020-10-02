@@ -15,6 +15,8 @@ import { shade, dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
+import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
+import { ArtistName } from '../../components/meta/ArtistName';
 import Footer from '../../components/Footer';
 
 const ArtistBody = createGlobalStyle`
@@ -25,7 +27,8 @@ const ArtistBody = createGlobalStyle`
 
 const root = process.cwd()
 
-export default function ArtistTemplate({ mdxSource, frontMatter }) {
+export default function ArtistTemplate({ frontMatter }) {
+  const router = useRouter();
   const artistTitle = `電視影劇裡出現過的 ${frontMatter.fullname} 歌曲`
 
   return(
@@ -35,7 +38,25 @@ export default function ArtistTemplate({ mdxSource, frontMatter }) {
       </Head>
       <GlobalStyles />
       <ArtistBody />
-      {frontMatter.fullname}
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Link href="/" passHref>
+              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem aria-label="Breadcrumb">
+            <Link href={`/artists/${router.query.slug}`} passHref>
+              <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <TitleGroup>
+        <Title>{frontMatter.fullname}</Title>
+        <TitleDescription>{artistTitle}</TitleDescription>
+      </TitleGroup>
+      <Footer />
     </>
   )
 }

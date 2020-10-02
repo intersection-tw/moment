@@ -10,7 +10,9 @@ import GlobalStyles from '../components/GlobalStyles';
 import { shade, dawn, midnight} from '../styles/color';
 import { familyDefault } from '../styles/font';
 
+import { TitleGroup, Title, TitleDescription } from '../components/Titles';
 import { Year } from '../components/meta/Year';
+import { ArtistName } from '../components/meta/ArtistName';
 
 import { LayoutSection } from '../components/Section';
 import Footer from '../components/Footer';
@@ -23,35 +25,8 @@ const IndexBody = createGlobalStyle`
   }
 `;
 
-const IndexTitleGroup = styled.hgroup`
-  margin: 0 16px 16px;
-  padding-top: 16px;
-  font-family: ${familyDefault};
-`;
-
-const Title = styled.h1`
-  margin: 0 0 4px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-size: 3.2rem;
-  font-weight: 500;
-`;
-
-const TitleDescription = styled.h2`
-  margin: 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
-  font-size: 1.4rem;
-  font-weight: 400;
-`;
-
 const SongsIndex = styled(LayoutSection)`
   font-family: ${familyDefault};
-`;
-
-const ArtistName = styled.h2`
-  display: inline-block;
-  margin: 0 0 6px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-weight: 400;
 `;
 
 const SongsList = styled.ul`
@@ -122,10 +97,10 @@ export default function IndexPage({ artistData, postData }) {
       </Head>
       <GlobalStyles />
       <IndexBody />
-      <IndexTitleGroup>
+      <TitleGroup>
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
-      </IndexTitleGroup>
+      </TitleGroup>
       <SongsIndex>
         {
           artists.map(artist => {

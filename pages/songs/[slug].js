@@ -26,6 +26,27 @@ const SongBody = createGlobalStyle`
   }
 `;
 
+const Meta = styled.section`
+  margin: 0 0 24px;
+  padding: 0 16px;
+  font-family: ${familyDefault};
+`;
+
+const MetaTitle = styled.h1`
+  margin: 12px 0 0;
+  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: ${36 / 28};
+`;
+
+const MetaArtist = styled.div`
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: ${24 / 16};
+`;
+
 const Article = styled.article`
   padding-right: 16px;
   padding-left: 16px;
@@ -43,27 +64,6 @@ const Article = styled.article`
     padding-right:0;
     padding-left:0;
   }
-`;
-
-const Meta = styled.section`
-  margin: 0 0 24px;
-  padding: 0 16px;
-  font-family: ${familyDefault};
-`;
-
-const MetaTitle = styled.h1`
-  margin: 0;
-  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
-  font-size: 2.8rem;
-  font-weight: 500;
-  line-height: ${36 / 28};
-`;
-
-const MetaArtist = styled.div`
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: ${24 / 16};
 `;
 
 const HeardTitle = styled.h2`
@@ -90,7 +90,7 @@ const HeardItem = styled.li`
 
 const root = process.cwd()
 
-export default function SongTemplate({ mdxSource, frontMatter }) {
+export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const router = useRouter();
 
   const components = { LyricSection }
@@ -120,37 +120,37 @@ export default function SongTemplate({ mdxSource, frontMatter }) {
       />
       <GlobalStyles />
       <SongBody />
+      <Breadcrumb aria-label="Breadcrumb">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Link href="/" passHref>
+              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+              <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <Meta>
+        <MetaTitle>
+          {frontMatter.title}
+        </MetaTitle>
+        <Year>{frontMatter.year}</Year>
+      </Meta>
       <MdxStyle>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Link href="/" passHref>
-                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
-                <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
-              </Link>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <Meta>
-          <MetaTitle>
-            {frontMatter.title}
-          </MetaTitle>
-          <Year>{frontMatter.year}</Year>
-        </Meta>
         <Article>
           {content}
         </Article>
-        <LayoutSection>
-          <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
-          <HeardList>
-            {heardListData}
-          </HeardList>
-        </LayoutSection>
       </MdxStyle>
+      <LayoutSection>
+        <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
+        <HeardList>
+          {heardListData}
+        </HeardList>
+      </LayoutSection>
       <Footer />
     </>
   )
@@ -166,6 +166,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  const artistsRoot = path.join(root, 'artists');
+  const artistData = fs.readdirSync(artistsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(artistsRoot, p), 'utf8');
+    return {
+      slug: p.replace(/\.mdx/, ''),
+      frontMatter: matter(content).data,
+    }
+  })
+
   const songSource = fs.readFileSync(
     path.join(root, 'songs', `${params.slug}.mdx`),
     'utf8'
@@ -174,5 +183,5 @@ export async function getStaticProps({ params }) {
   const { data, content } = matter(songSource);
   const mdxSource = await renderToString(content);
 
-  return { props: { mdxSource, frontMatter: data } }
+  return { props: { artistData, mdxSource, frontMatter: data } }
 }

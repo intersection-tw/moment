@@ -8,7 +8,7 @@ const Breadcrumb = styled.nav`
   top: 0;
   right: 0;
   left: 0;
-  margin-bottom: 16px;
+  margin: 0;
   padding: 0 16px;
   background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
   backdrop-filter: blur(20px);
