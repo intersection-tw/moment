@@ -17,12 +17,34 @@ import { familyDefault } from '../../styles/font';
 import { LayoutSection, LyricSection } from '../../components/Section';
 import { Year } from '../../components/meta/Year';
 
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import Footer from '../../components/Footer';
 
 const SongBody = createGlobalStyle`
   body {
     background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
   }
+`;
+
+const Meta = styled.section`
+  margin: 0 0 24px;
+  padding: 0 16px;
+  font-family: ${familyDefault};
+`;
+
+const MetaTitle = styled.h1`
+  margin: 12px 0 0;
+  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: ${36 / 28};
+`;
+
+const MetaArtist = styled.div`
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: ${24 / 16};
 `;
 
 const Article = styled.article`
@@ -44,63 +66,6 @@ const Article = styled.article`
   }
 `;
 
-const Breadcrumb = styled.nav`
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-bottom: 16px;
-  padding: 0 16px;
-  background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
-  backdrop-filter: blur(20px);
-  z-index: 1;
-`;
-
-const BreadcrumbList = styled.ul`
-  display: flex;
-  margin: 0;
-  padding: 0;
-`;
-
-const BreadcrumbItem = styled.li`
-  margin: 0;
-  padding: 2px 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
-  font-family: ${familyDefault};
-  font-size: 1.4rem;
-  line-height: ${32 / 14};
-  list-style: none;
-`;
-
-const BreadcrumbItemLink = styled.a`
-  display: inline-block;
-  margin-left: -8px;
-  padding: 0 8px;
-  color: inherit;
-  text-decoration: none;
-`;
-
-const Meta = styled.section`
-  margin: 0 0 24px;
-  padding: 0 16px;
-  font-family: ${familyDefault};
-`;
-
-const MetaTitle = styled.h1`
-  margin: 0;
-  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
-  font-size: 2.8rem;
-  font-weight: 500;
-  line-height: ${36 / 28};
-`;
-
-const MetaArtist = styled.div`
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: ${24 / 16};
-`;
-
 const HeardTitle = styled.h2`
   margin: 0 0 8px;
   padding: 8px 0 0;
@@ -111,6 +76,7 @@ const HeardTitle = styled.h2`
 const HeardList = styled.ul`
   margin: 0;
   padding: 0 8px;
+  font-family: ${familyDefault};
   background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
 `;
 
@@ -125,7 +91,7 @@ const HeardItem = styled.li`
 
 const root = process.cwd()
 
-export default function BlogPost({ mdxSource, frontMatter }) {
+export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const router = useRouter();
 
   const components = { LyricSection }
@@ -143,64 +109,76 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
   return (
     <>
-      <Head>
-        <title>{songTitle}</title>
-      </Head>
-      <Seo slug={router.query.slug}
-           title={songTitle}
+      <Seo title={`${songTitle} - Moment`}
+           slug={router.query.slug}
            description={songDescription}
            published={frontMatter.published}
            modified={frontMatter.modified}
-           artist={frontMatter.artist}
       />
       <GlobalStyles />
       <SongBody />
+      <Breadcrumb aria-label="Breadcrumb">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Link href="/" passHref>
+              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+              <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <Meta>
+        <MetaTitle>
+          {frontMatter.title}
+        </MetaTitle>
+        <Year>{frontMatter.year}</Year>
+      </Meta>
       <MdxStyle>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Link href="/" passHref>
-                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem>{frontMatter.artist}</BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <Meta>
-          <MetaTitle>
-            {frontMatter.title}
-          </MetaTitle>
-          <Year>{frontMatter.year}</Year>
-        </Meta>
         <Article>
           {content}
         </Article>
-        <LayoutSection>
-          <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
-          <HeardList>
-            {heardListData}
-          </HeardList>
-        </LayoutSection>
       </MdxStyle>
+      <LayoutSection>
+        <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
+        <HeardList>
+          {heardListData}
+        </HeardList>
+      </LayoutSection>
       <Footer />
     </>
   )
 }
+
 export async function getStaticPaths() {
   return {
     fallback: false,
     paths: fs
-      .readdirSync(path.join(root, 'songs'))
-      .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
+    .readdirSync(path.join(root, 'songs'))
+    .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
   }
 }
+
 export async function getStaticProps({ params }) {
-  const source = fs.readFileSync(
+  const artistsRoot = path.join(root, 'artists');
+  const artistData = fs.readdirSync(artistsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(artistsRoot, p), 'utf8');
+    return {
+      slug: p.replace(/\.mdx/, ''),
+      frontMatter: matter(content).data,
+    }
+  })
+
+  const songSource = fs.readFileSync(
     path.join(root, 'songs', `${params.slug}.mdx`),
     'utf8'
-  )
-  const { data, content } = matter(source);
+  );
 
-  const mdxSource = await renderToString(content)
-  return { props: { mdxSource, frontMatter: data } }
+  const { data, content } = matter(songSource);
+  const mdxSource = await renderToString(content);
+
+  return { props: { artistData, mdxSource, frontMatter: data } }
 }

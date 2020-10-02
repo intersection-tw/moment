@@ -10,7 +10,9 @@ import GlobalStyles from '../components/GlobalStyles';
 import { shade, dawn, midnight} from '../styles/color';
 import { familyDefault } from '../styles/font';
 
+import { TitleGroup, Title, TitleDescription } from '../components/Titles';
 import { Year } from '../components/meta/Year';
+import { ArtistName } from '../components/meta/ArtistName';
 
 import { LayoutSection } from '../components/Section';
 import Footer from '../components/Footer';
@@ -23,34 +25,8 @@ const IndexBody = createGlobalStyle`
   }
 `;
 
-const IndexTitleGroup = styled.hgroup`
-  margin: 0 16px 16px;
-  padding-top: 16px;
-  font-family: ${familyDefault};
-`;
-
-const Title = styled.h1`
-  margin: 0 0 4px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-size: 3.2rem;
-  font-weight: 500;
-`;
-
-const TitleDescription = styled.h2`
-  margin: 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
-  font-size: 1.4rem;
-  font-weight: 400;
-`;
-
 const SongsIndex = styled(LayoutSection)`
   font-family: ${familyDefault};
-`;
-
-const ArtistName = styled.h2`
-  margin: 0 0 6px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
-  font-weight: 400;
 `;
 
 const SongsList = styled.ul`
@@ -82,9 +58,9 @@ const SongName = styled.span`
   vertical-align: baseline;
 `;
 
-export default function IndexPage({ postData }) {
-  const artists = [...new Set(postData.map(data => {
-    return data.frontMatter.artist
+export default function IndexPage({ artistData, postData }) {
+  const artists = [...new Set(artistData.map(data => {
+    return data.frontMatter.fullname
   }))];
 
   const indexLinksSchema = postData.map((data, index) => {
@@ -103,7 +79,6 @@ export default function IndexPage({ postData }) {
            description="讓電影、日美劇致敬的經典歌曲歌詞"
            published="2020-09-21"
            modified="2020-09-22"
-           artist={process.env.NEXT_PUBLIC_AUTHOR}
       />
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:
@@ -121,10 +96,10 @@ export default function IndexPage({ postData }) {
       </Head>
       <GlobalStyles />
       <IndexBody />
-      <IndexTitleGroup>
+      <TitleGroup>
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
-      </IndexTitleGroup>
+      </TitleGroup>
       <SongsIndex>
         {
           artists.map(artist => {
@@ -162,14 +137,23 @@ export default function IndexPage({ postData }) {
 }
 
 export async function getStaticProps() {
-  const contentRoot = path.join(root, 'songs');
-  const postData = fs.readdirSync(contentRoot).map((p) => {
-    const content = fs.readFileSync(path.join(contentRoot, p), 'utf8');
+  const artistsRoot = path.join(root, 'artists');
+  const artistData = fs.readdirSync(artistsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(artistsRoot, p), 'utf8');
+    return {
+      slug: p.replace(/\.mdx/, ''),
+      frontMatter: matter(content).data,
+    }
+  })
+
+  const songsRoot = path.join(root, 'songs');
+  const postData = fs.readdirSync(songsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(songsRoot, p), 'utf8');
     return {
       slug: p.replace(/\.mdx/, ''),
       content,
       frontMatter: matter(content).data,
     }
   })
-  return { props: { postData } }
+  return { props: { artistData, postData } }
 };
