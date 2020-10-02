@@ -76,6 +76,7 @@ const HeardTitle = styled.h2`
 const HeardList = styled.ul`
   margin: 0;
   padding: 0 8px;
+  font-family: ${familyDefault};
   background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
 `;
 
@@ -108,15 +109,11 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
 
   return (
     <>
-      <Head>
-        <title>{songTitle}</title>
-      </Head>
-      <Seo slug={router.query.slug}
-           title={songTitle}
+      <Seo title={`${songTitle} - Moment`}
+           slug={router.query.slug}
            description={songDescription}
            published={frontMatter.published}
            modified={frontMatter.modified}
-           artist={frontMatter.artist}
       />
       <GlobalStyles />
       <SongBody />

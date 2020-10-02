@@ -33,9 +33,12 @@ export default function ArtistTemplate({ frontMatter }) {
 
   return(
     <>
-      <Head>
-        <title>{artistTitle}</title>
-      </Head>
+      <Seo title={`${artistTitle} - Moment`}
+           slug={router.query.slug}
+           description=""
+           published={frontMatter.published}
+           modified={frontMatter.modified}
+      />
       <GlobalStyles />
       <ArtistBody />
       <Breadcrumb>

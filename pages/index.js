@@ -79,7 +79,6 @@ export default function IndexPage({ artistData, postData }) {
            description="讓電影、日美劇致敬的經典歌曲歌詞"
            published="2020-09-21"
            modified="2020-09-22"
-           artist={process.env.NEXT_PUBLIC_AUTHOR}
       />
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:
