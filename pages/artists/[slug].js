@@ -17,6 +17,8 @@ import { familyDefault } from '../../styles/font';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
 import { ArtistName } from '../../components/meta/ArtistName';
+import { Year } from '../../components/meta/Year';
+import { SongsIndex, SongsList, SongItem, SongLink, SongName } from '../../components/SongsList';
 import Footer from '../../components/Footer';
 
 const ArtistBody = createGlobalStyle`
@@ -27,10 +29,13 @@ const ArtistBody = createGlobalStyle`
 
 const root = process.cwd()
 
-export default function ArtistTemplate({ frontMatter }) {
+export default function ArtistTemplate({ frontMatter, songData }) {
   const router = useRouter();
   const artistTitle = `電視影劇裡出現過的 ${frontMatter.fullname} 歌曲`
 
+  const songsofArtist = songData.filter(song => {
+    return song.frontMatter.artist === frontMatter.fullname
+  })
   return(
     <>
       <Seo title={`${artistTitle} - Moment`}
@@ -59,6 +64,24 @@ export default function ArtistTemplate({ frontMatter }) {
         <Title>{frontMatter.fullname}</Title>
         <TitleDescription>{artistTitle}</TitleDescription>
       </TitleGroup>
+      <SongsIndex>
+        <SongsList>
+        {
+          songsofArtist.map(s => {
+            return(
+              <SongItem>
+                <Link href={`/songs/${s.slug}`} passHref>
+                  <SongLink>
+                    <SongName>{s.frontMatter.title}</SongName>
+                    <Year>{s.frontMatter.year}</Year>
+                  </SongLink>
+                </Link>
+              </SongItem>
+            )
+          })
+        }
+        </SongsList>
+      </SongsIndex>
       <Footer />
     </>
   )
@@ -74,13 +97,23 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const source = fs.readFileSync(
+  const artistSource = fs.readFileSync(
     path.join(root, 'artists', `${params.slug}.mdx`),
     'utf8'
   )
 
-  const { data, content } = matter(source);
+  const { data, content } = matter(artistSource);
   const mdxSource = await renderToString(content);
 
-  return { props: { mdxSource, frontMatter: data } }
+  const songsRoot = path.join(root, 'songs');
+  const songData = fs.readdirSync(songsRoot).map((p) => {
+    const content = fs.readFileSync(path.join(songsRoot, p), 'utf8');
+    return {
+      slug: p.replace(/\.mdx/, ''),
+      content,
+      frontMatter: matter(content).data,
+    }
+  })
+
+  return { props: { mdxSource, frontMatter: data, songData } }
 }
