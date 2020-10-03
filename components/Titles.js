@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { midnight} from '../styles/color';
+import { midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
 const TitleGroup = styled.hgroup`

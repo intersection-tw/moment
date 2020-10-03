@@ -15,6 +15,7 @@ import { Year } from '../components/meta/Year';
 import { ArtistName } from '../components/meta/ArtistName';
 
 import { LayoutSection } from '../components/Section';
+import { SongsIndex, SongsList, SongItem, SongLink, SongName } from '../components/SongsList';
 import Footer from '../components/Footer';
 
 const root = process.cwd();
@@ -25,45 +26,12 @@ const IndexBody = createGlobalStyle`
   }
 `;
 
-const SongsIndex = styled(LayoutSection)`
-  font-family: ${familyDefault};
-`;
-
-const SongsList = styled.ul`
-  margin: 0 0 16px;
-  padding: 0;
-
-  :last-of-type {
-    margin: 0;
-  }
-`;
-
-const SongItem = styled.li`
-  margin-bottom: 12px;
-  list-style: none;
-`;
-
-const Song = styled.a`
-  display: inline-block;
-  padding: 4px 0;
-  text-decoration: none;
-`;
-
-const SongName = styled.span`
-  display: inline-block;
-  margin-right: 8px;
-  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
-  font-size: 2rem;
-  line-height: ${ 30 / 20 };
-  vertical-align: baseline;
-`;
-
-export default function IndexPage({ artistData, postData }) {
-  const artists = [...new Set(artistData.map(data => {
+export default function IndexPage({ artistData, songData }) {
+  const artists = artistData.map(data => {
     return data.frontMatter.fullname
-  }))];
+  });
 
-  const indexLinksSchema = postData.map((data, index) => {
+  const indexLinksSchema = songData.map((data, index) => {
     return(
       {
         '@type': 'ListItem',
@@ -103,7 +71,7 @@ export default function IndexPage({ artistData, postData }) {
       <SongsIndex>
         {
           artists.map(artist => {
-            const songsofArtist = postData.filter(song => {
+            const songsofArtist = songData.filter(song => {
               return song.frontMatter.artist === artist
             })
             
@@ -111,10 +79,10 @@ export default function IndexPage({ artistData, postData }) {
               return(
                 <SongItem key={s.slug}>
                   <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
-                    <Song>
+                    <SongLink>
                       <SongName>{s.frontMatter.title}</SongName>
                       <Year>{s.frontMatter.year}</Year>
-                    </Song>
+                    </SongLink>
                   </Link>
                 </SongItem>
               );
@@ -147,7 +115,7 @@ export async function getStaticProps() {
   })
 
   const songsRoot = path.join(root, 'songs');
-  const postData = fs.readdirSync(songsRoot).map((p) => {
+  const songData = fs.readdirSync(songsRoot).map((p) => {
     const content = fs.readFileSync(path.join(songsRoot, p), 'utf8');
     return {
       slug: p.replace(/\.mdx/, ''),
@@ -155,5 +123,5 @@ export async function getStaticProps() {
       frontMatter: matter(content).data,
     }
   })
-  return { props: { artistData, postData } }
+  return { props: { artistData, songData } }
 };
