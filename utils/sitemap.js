@@ -3,8 +3,23 @@ const path = require('path');
 const prettier = require('prettier');
 
 const root = process.cwd();
+// const artistsRoot = path.join(root, 'artists');
+// const artists = fs.readdirSync(artistsRoot);
 const songsRoot = path.join(root, 'songs');
 const songs = fs.readdirSync(songsRoot);
+
+// ${artists
+//   .map((artist) => {
+//     const path = artist
+//       .replace('.mdx', '');
+//     return `
+//       <url>
+//         <loc>${`https://moment.intersection.tw/artists/${path}`}</loc>
+//       </url>`
+//     ;
+//   })
+//   .join('')
+// }
 
 (async () => {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
@@ -25,7 +40,8 @@ const songs = fs.readdirSync(songsRoot);
               </url>`
             ;
           })
-          .join('')}
+          .join('')
+        }
     </urlset>
   `;
 
