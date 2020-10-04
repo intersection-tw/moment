@@ -19,7 +19,7 @@ function MdxStyle({ children }) {
     <MDXProvider
       components={{
         p: (props) => <Paragraph {...props} />,
-        div: (props) => <LyricSection {...props} />
+        LyricSection: (props) => <LyricSection {...props} />
     }}>
       {children}
     </MDXProvider>

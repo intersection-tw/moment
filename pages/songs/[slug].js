@@ -97,12 +97,11 @@ const HeardItem = styled.li`
   list-style: none;
 `;
 
-const root = process.cwd()
+const root = process.cwd();
+const components = { LyricSection, Paragraph };
 
 export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const router = useRouter();
-
-  const components = { LyricSection, Paragraph }
 
   const content = hydrate(mdxSource, { components })
 
@@ -218,7 +217,7 @@ export async function getStaticProps({ params }) {
   );
 
   const { data, content } = matter(songSource);
-  const mdxSource = await renderToString(content);
+  const mdxSource = await renderToString(content, { components });
 
   return { props: { artistData, mdxSource, frontMatter: data } }
 }
