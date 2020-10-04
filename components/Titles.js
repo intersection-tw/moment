@@ -4,8 +4,8 @@ import { midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
 const TitleGroup = styled.hgroup`
-  margin: 0 16px 16px;
-  padding-top: 16px;
+  margin: 0 0 16px;
+  padding: 16px 16px 0;
   font-family: ${familyDefault};
 `;
 

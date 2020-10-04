@@ -14,15 +14,34 @@ import Seo from '../../components/Seo';
 import { shade, dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 
+import { isMobile } from '../../utils/isMobile';
 import { LayoutSection, LyricSection } from '../../components/Section';
 import { Year } from '../../components/meta/Year';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import Footer from '../../components/Footer';
 
-const SongBody = createGlobalStyle`
+const SongTemplateBody = createGlobalStyle`
   body {
     background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  }
+`;
+
+const ResponsiveLayout = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  @media screen and (min-width: 992px) {
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding-right:0;
+    padding-left:0;
   }
 `;
 
@@ -48,22 +67,7 @@ const MetaArtist = styled.div`
 `;
 
 const Article = styled.article`
-  padding-right: 16px;
-  padding-left: 16px;
-
-  @media screen and (min-width: 768px) {
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media screen and (min-width: 992px) {
-    max-width: 960px;
-  }
-
-  @media screen and (min-width: 1200px) {
-    padding-right:0;
-    padding-left:0;
-  }
+  padding: 0 16px;
 `;
 
 const HeardTitle = styled.h2`
@@ -116,38 +120,70 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
            modified={frontMatter.modified}
       />
       <GlobalStyles />
-      <SongBody />
-      <Breadcrumb aria-label="Breadcrumb">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <Link href="/" passHref>
-              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
-              <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Meta>
-        <MetaTitle>
-          {frontMatter.title}
-        </MetaTitle>
-        <Year>{frontMatter.year}</Year>
-      </Meta>
-      <MdxStyle>
-        <Article>
-          {content}
-        </Article>
-      </MdxStyle>
-      <LayoutSection>
-        <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
-        <HeardList>
-          {heardListData}
-        </HeardList>
-      </LayoutSection>
+      <SongTemplateBody />
+      <ResponsiveLayout>
+        {
+          isMobile() &&
+          <>
+            <Breadcrumb aria-label="Breadcrumb">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <Link href="/" passHref>
+                    <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+                  </Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+                    <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+                  </Link>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            <Meta>
+              <MetaTitle>
+                {frontMatter.title}
+              </MetaTitle>
+              <Year>{frontMatter.year}</Year>
+            </Meta>
+          </>
+        }
+        {
+          !isMobile() &&
+          <Breadcrumb aria-label="Breadcrumb">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <Link href="/" passHref>
+                  <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+                  <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+            <Meta>
+              <MetaTitle>
+                {frontMatter.title}
+              </MetaTitle>
+              <Year>{frontMatter.year}</Year>
+            </Meta>
+          </Breadcrumb>
+        }
+        <main>
+          <MdxStyle>
+            <Article>
+              {content}
+            </Article>
+          </MdxStyle>
+          <LayoutSection>
+            <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
+            <HeardList>
+              {heardListData}
+            </HeardList>
+          </LayoutSection>
+        </main>
+      </ResponsiveLayout>
       <Footer />
     </>
   )

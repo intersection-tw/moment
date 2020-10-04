@@ -8,6 +8,7 @@ import { familyDefault } from '../styles/font';
 import { LayoutSection } from './Section';
 
 const FooterContainer = styled(LayoutSection)`
+  padding-bottom: 32px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
 `;
