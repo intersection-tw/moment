@@ -54,7 +54,8 @@ const Meta = styled.section`
 `;
 
 const MetaTitle = styled.h1`
-  margin: 12px 0 0;
+  display: inline-block;
+  margin: 12px 8px 0 0;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
