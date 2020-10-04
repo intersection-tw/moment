@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { familyDefault } from '../styles/font';
 
+import { LyricSection } from './Section';
+
 const Paragraph = styled.p`
   margin: 0 0 10px;
   font-family: ${ familyDefault };
@@ -16,11 +18,14 @@ function MdxStyle({ children }) {
   return(
     <MDXProvider
       components={{
-        p: (props) => <Paragraph {...props} />
+        p: (props) => <Paragraph {...props} />,
+        div: (props) => <LyricSection {...props} />
     }}>
       {children}
     </MDXProvider>
   )
 };
+
+export { Paragraph };
 
 export default MdxStyle;
