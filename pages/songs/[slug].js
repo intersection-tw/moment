@@ -19,6 +19,7 @@ import { LayoutSection, LyricSection } from '../../components/Section';
 import { Year } from '../../components/meta/Year';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
+import { Paragraph } from '../../components/MdxStyle';
 import Footer from '../../components/Footer';
 
 const SongTemplateBody = createGlobalStyle`
@@ -31,6 +32,7 @@ const ResponsiveLayout = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: flex-start;
+    padding-top: 24px;
   }
 
   @media screen and (min-width: 992px) {
@@ -98,7 +100,7 @@ const root = process.cwd()
 export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const router = useRouter();
 
-  const components = { LyricSection }
+  const components = { LyricSection, Paragraph }
 
   const content = hydrate(mdxSource, { components })
 
@@ -171,11 +173,11 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
           </Breadcrumb>
         }
         <main>
-          <MdxStyle>
-            <Article>
+          <Article>
+            <MdxStyle>
               {content}
-            </Article>
-          </MdxStyle>
+            </MdxStyle>
+          </Article>
           <LayoutSection>
             <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
             <HeardList>

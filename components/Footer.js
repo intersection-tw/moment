@@ -11,6 +11,11 @@ const FooterContainer = styled(LayoutSection)`
   padding-bottom: 32px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
+
+  @media screen and (min-width: 992px) {
+    max-width: 960px;
+    margin: 0 auto;
+  }
 `;
 
 const Name = styled.h2`

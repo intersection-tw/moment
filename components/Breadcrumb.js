@@ -14,6 +14,7 @@ const Breadcrumb = styled.nav`
   @media screen and (min-width: 768px) {
     flex: 0 0 320px;
     padding: 0 0 16px 0;
+    top: 24px;
   }
 `;
 

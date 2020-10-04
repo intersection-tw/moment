@@ -23,4 +23,6 @@ function MdxStyle({ children }) {
   )
 };
 
+export { Paragraph };
+
 export default MdxStyle;
