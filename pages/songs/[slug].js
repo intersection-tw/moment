@@ -76,6 +76,7 @@ const Article = styled.article`
 const HeardTitle = styled.h2`
   margin: 0 0 8px;
   padding: 8px 0 0;
+  font-family: ${familyDefault};
   color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
   font-size: 1.6rem;
 `;

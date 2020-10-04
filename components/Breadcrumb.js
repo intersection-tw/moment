@@ -26,7 +26,6 @@ const BreadcrumbList = styled.ul`
   backdrop-filter: blur(8px);
 
   @media screen and (min-width: 768px) {
-    flex-direction: column;
     margin: 0;
   }
 `;
