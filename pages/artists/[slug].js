@@ -18,7 +18,7 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '
 import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
 import { ArtistName } from '../../components/meta/ArtistName';
 import { Year } from '../../components/meta/Year';
-import { SongsIndex, SongsList, SongItem, SongLink, SongName } from '../../components/SongsList';
+import { SongsList, SongItem, SongLink, SongName } from '../../components/SongsList';
 import Footer from '../../components/Footer';
 
 const ArtistBody = createGlobalStyle`
@@ -64,24 +64,22 @@ export default function ArtistTemplate({ frontMatter, songData }) {
         <Title>{frontMatter.fullname}</Title>
         <TitleDescription>{artistTitle}</TitleDescription>
       </TitleGroup>
-      <SongsIndex>
-        <SongsList>
-        {
-          songsofArtist.map(s => {
-            return(
-              <SongItem>
-                <Link href={`/songs/${s.slug}`} passHref>
-                  <SongLink>
-                    <SongName>{s.frontMatter.title}</SongName>
-                    <Year>{s.frontMatter.year}</Year>
-                  </SongLink>
-                </Link>
-              </SongItem>
-            )
-          })
-        }
-        </SongsList>
-      </SongsIndex>
+      <SongsList>
+      {
+        songsofArtist.map(s => {
+          return(
+            <SongItem>
+              <Link href={`/songs/${s.slug}`} passHref>
+                <SongLink>
+                  <SongName>{s.frontMatter.title}</SongName>
+                  <Year>{s.frontMatter.year}</Year>
+                </SongLink>
+              </Link>
+            </SongItem>
+          )
+        })
+      }
+      </SongsList>
       <Footer />
     </>
   )
