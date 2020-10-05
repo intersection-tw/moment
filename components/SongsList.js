@@ -5,8 +5,24 @@ import { familyDefault } from '../styles/font';
 
 import { LayoutSection } from './Section';
 
-const SongsIndex = styled(LayoutSection)`
+const MomentIndex = styled(LayoutSection)`
   font-family: ${familyDefault};
+
+  @media screen and (min-width: 992px) {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+`;
+
+const MomentIndexItem = styled.li`
+  margin: 0;
+  list-style: none;
+
+  @media screen and (min-width: 992px) {
+    flex: 0 0 50%;
+  }
 `;
 
 const SongsList = styled.ul`
@@ -38,4 +54,4 @@ const SongName = styled.span`
   vertical-align: baseline;
 `;
 
-export { SongsIndex, SongsList, SongItem, SongLink, SongName };
+export { MomentIndex, MomentIndexItem, SongsList, SongItem, SongLink, SongName };

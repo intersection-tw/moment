@@ -10,12 +10,14 @@ import GlobalStyles from '../components/GlobalStyles';
 import { shade, dawn, midnight} from '../styles/color';
 import { familyDefault } from '../styles/font';
 
+import { isMobile } from '../utils/isMobile';
+
 import { TitleGroup, Title, TitleDescription } from '../components/Titles';
 import { Year } from '../components/meta/Year';
 import { ArtistName } from '../components/meta/ArtistName';
 
 import { LayoutSection } from '../components/Section';
-import { SongsIndex, SongsList, SongItem, SongLink, SongName } from '../components/SongsList';
+import { MomentIndex, MomentIndexItem, SongsList, SongItem, SongLink, SongName } from '../components/SongsList';
 import Footer from '../components/Footer';
 
 const root = process.cwd();
@@ -29,7 +31,7 @@ const IndexBody = createGlobalStyle`
 const IndexTitleGroup = styled(TitleGroup)`
   @media screen and (min-width: 992px) {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 0 auto 24px;
   }
 `;
 
@@ -75,7 +77,7 @@ export default function IndexPage({ artistData, songData }) {
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
       </IndexTitleGroup>
-      <SongsIndex>
+      <MomentIndex as="ul">
         {
           artists.map(artist => {
             const songsofArtist = songData.filter(song => {
@@ -96,16 +98,16 @@ export default function IndexPage({ artistData, songData }) {
             });
 
             return(
-              <>
+              <MomentIndexItem>
                 <ArtistName>{artist}</ArtistName>
                 <SongsList>
                   {songs}
                 </SongsList>
-              </>
+              </MomentIndexItem>
             );
           })
         }
-      </SongsIndex>
+      </MomentIndex>
       <Footer />
     </>
   )
