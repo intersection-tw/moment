@@ -26,6 +26,13 @@ const IndexBody = createGlobalStyle`
   }
 `;
 
+const IndexTitleGroup = styled(TitleGroup)`
+  @media screen and (min-width: 992px) {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+`;
+
 export default function IndexPage({ artistData, songData }) {
   const artists = artistData.map(data => {
     return data.frontMatter.fullname
@@ -64,10 +71,10 @@ export default function IndexPage({ artistData, songData }) {
       </Head>
       <GlobalStyles />
       <IndexBody />
-      <TitleGroup>
+      <IndexTitleGroup>
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
-      </TitleGroup>
+      </IndexTitleGroup>
       <SongsIndex>
         {
           artists.map(artist => {
