@@ -30,7 +30,7 @@ const IndexBody = createGlobalStyle`
 
 const IndexTitleGroup = styled(TitleGroup)`
   @media screen and (min-width: 992px) {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto 24px;
   }
 `;
@@ -77,36 +77,36 @@ export default function IndexPage({ artistData, songData }) {
         <Title>The Moment</Title>
         <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
       </IndexTitleGroup>
-      <MomentIndex as="ul">
-        {
-          artists.map(artist => {
-            const songsofArtist = songData.filter(song => {
-              return song.frontMatter.artist === artist
-            })
-            
-            const songs = songsofArtist.map(s => {
-              return(
-                <SongItem key={s.slug}>
-                  <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
-                    <SongLink>
-                      <SongName>{s.frontMatter.title}</SongName>
-                      <Year>{s.frontMatter.year}</Year>
-                    </SongLink>
-                  </Link>
-                </SongItem>
-              );
-            });
-
-            return(
-              <MomentIndexItem>
-                <ArtistName>{artist}</ArtistName>
-                <SongsList>
-                  {songs}
-                </SongsList>
-              </MomentIndexItem>
-            );
+      <MomentIndex>
+      {
+        artists.map(artist => {
+          const songsofArtist = songData.filter(song => {
+            return song.frontMatter.artist === artist
           })
-        }
+          
+          const songs = songsofArtist.map(s => {
+            return(
+              <SongItem key={s.slug}>
+                <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
+                  <SongLink>
+                    <SongName>{s.frontMatter.title}</SongName>
+                    <Year>{s.frontMatter.year}</Year>
+                  </SongLink>
+                </Link>
+              </SongItem>
+            );
+          });
+
+          return(
+            <MomentIndexItem key={artist}>
+              <ArtistName>{artist}</ArtistName>
+              <SongsList>
+                {songs}
+              </SongsList>
+            </MomentIndexItem>
+          );
+        })
+      }
       </MomentIndex>
       <Footer />
     </>

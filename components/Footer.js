@@ -13,7 +13,7 @@ const FooterContainer = styled(LayoutSection)`
   font-family: ${familyDefault};
 
   @media screen and (min-width: 992px) {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
   }
 `;

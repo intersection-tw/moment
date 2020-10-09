@@ -13,9 +13,11 @@ import GlobalStyles from '../../components/GlobalStyles';
 
 import { shade, dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
+import { isMobile } from '../../utils/isMobile';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
+import { ResponsiveLayout } from '../../components/ResonsiveLayout';
 import { ArtistName } from '../../components/meta/ArtistName';
 import { Year } from '../../components/meta/Year';
 import { SongsList, SongItem, SongLink, SongName } from '../../components/SongsList';
@@ -25,6 +27,10 @@ const ArtistBody = createGlobalStyle`
   body {
     background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
   }
+`;
+
+const ArtistSongsList = styled(SongsList)`
+  padding: 0 16px;
 `;
 
 const root = process.cwd()
@@ -46,40 +52,68 @@ export default function ArtistTemplate({ frontMatter, songData }) {
       />
       <GlobalStyles />
       <ArtistBody />
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <Link href="/" passHref>
-              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem aria-label="Breadcrumb">
-            <Link href={`/artists/${router.query.slug}`} passHref>
-              <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <TitleGroup>
-        <Title>{frontMatter.fullname}</Title>
-        <TitleDescription>{artistTitle}</TitleDescription>
-      </TitleGroup>
-      <SongsList>
-      {
-        songsofArtist.map(s => {
-          return(
-            <SongItem>
-              <Link href={`/songs/${s.slug}`} passHref>
-                <SongLink>
-                  <SongName>{s.frontMatter.title}</SongName>
-                  <Year>{s.frontMatter.year}</Year>
-                </SongLink>
-              </Link>
-            </SongItem>
-          )
-        })
-      }
-      </SongsList>
+      <ResponsiveLayout>
+        {
+          isMobile() &&
+          <>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <Link href="/" passHref>
+                    <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+                  </Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem aria-label="Breadcrumb">
+                  <Link href={`/artists/${router.query.slug}`} passHref>
+                    <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
+                  </Link>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            <TitleGroup>
+              <Title>{frontMatter.fullname}</Title>
+              <TitleDescription>{artistTitle}</TitleDescription>
+            </TitleGroup>
+          </>
+        }
+        {
+          !isMobile() &&
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <Link href="/" passHref>
+                  <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem aria-label="Breadcrumb">
+                <Link href={`/artists/${router.query.slug}`} passHref>
+                  <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+            <TitleGroup>
+              <Title>{frontMatter.fullname}</Title>
+              <TitleDescription>{artistTitle}</TitleDescription>
+            </TitleGroup>
+          </Breadcrumb>
+        }
+        <ArtistSongsList>
+        {
+          songsofArtist.map(s => {
+            return(
+              <SongItem key={s.slug}>
+                <Link href={`/songs/${s.slug}`} passHref>
+                  <SongLink>
+                    <SongName>{s.frontMatter.title}</SongName>
+                    <Year>{s.frontMatter.year}</Year>
+                  </SongLink>
+                </Link>
+              </SongItem>
+            )
+          })
+        }
+        </ArtistSongsList>
+      </ResponsiveLayout>
       <Footer />
     </>
   )

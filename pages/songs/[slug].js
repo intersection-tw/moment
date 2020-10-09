@@ -16,6 +16,7 @@ import { familyDefault } from '../../styles/font';
 
 import { isMobile } from '../../utils/isMobile';
 import { LayoutSection, LyricSection } from '../../components/Section';
+import { ResponsiveLayout } from '../../components/ResonsiveLayout';
 import { Year } from '../../components/meta/Year';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
@@ -28,34 +29,17 @@ const SongTemplateBody = createGlobalStyle`
   }
 `;
 
-const ResponsiveLayout = styled.div`
-  @media screen and (min-width: 768px) {
-    display: flex;
-    align-items: flex-start;
-    padding-top: 24px;
-  }
-
-  @media screen and (min-width: 992px) {
-    max-width: 960px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media screen and (min-width: 1200px) {
-    padding-right:0;
-    padding-left:0;
-  }
-`;
-
 const Meta = styled.section`
-  margin: 0 0 24px;
-  padding: 0 16px;
   font-family: ${familyDefault};
+
+  @media screen and (min-width: 768px) {
+    padding-left: 16px;
+  }
 `;
 
 const MetaTitle = styled.h1`
   display: inline-block;
-  margin: 12px 8px 0 0;
+  margin: 0 8px 8px 0;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
@@ -70,7 +54,16 @@ const MetaArtist = styled.div`
 `;
 
 const Article = styled.article`
-  padding: 0 16px;
+  grid-area: lyric;
+  padding: 16px 16px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 32px 16px 0;
+  }
+`;
+
+const Heard = styled(LayoutSection)`
+  grid-area: heard;
 `;
 
 const HeardTitle = styled.h2`
@@ -108,9 +101,9 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const songTitle = `${frontMatter.artist} 的 ${frontMatter.title} 歌詞`;
   const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.heard}。`;
 
-  const heardListData = frontMatter.heard.split('、').map(video => {
+  const heardListData = frontMatter.heard.split('、').map((video, index) => {
     return (
-      <HeardItem>{video}</HeardItem>
+      <HeardItem key={index}>{video}</HeardItem>
     )
   });
 
@@ -125,67 +118,37 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
       <GlobalStyles />
       <SongTemplateBody />
       <ResponsiveLayout>
-        {
-          isMobile() &&
-          <>
-            <Breadcrumb aria-label="Breadcrumb">
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <Link href="/" passHref>
-                    <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbItem>
-                  <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
-                    <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
-                  </Link>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <Meta>
-              <MetaTitle>
-                {frontMatter.title}
-              </MetaTitle>
-              <Year>{frontMatter.year}</Year>
-            </Meta>
-          </>
-        }
-        {
-          !isMobile() &&
-          <Breadcrumb aria-label="Breadcrumb">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <Link href="/" passHref>
-                  <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-                </Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem>
-                <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
-                  <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
-                </Link>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-            <Meta>
-              <MetaTitle>
-                {frontMatter.title}
-              </MetaTitle>
-              <Year>{frontMatter.year}</Year>
-            </Meta>
-          </Breadcrumb>
-        }
-        <main>
-          <Article>
-            <MdxStyle>
-              {content}
-            </MdxStyle>
-          </Article>
-          <LayoutSection>
-            <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
-            <HeardList>
-              {heardListData}
-            </HeardList>
-          </LayoutSection>
-        </main>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <Link href="/" passHref>
+                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+                <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+          <Meta>
+            <MetaTitle>
+              {frontMatter.title}
+            </MetaTitle>
+            <Year>{frontMatter.year}</Year>
+          </Meta>
+        </Breadcrumb>
+        <Article>
+          <MdxStyle>
+            {content}
+          </MdxStyle>
+        </Article>
+        <Heard>
+          <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
+          <HeardList>
+            {heardListData}
+          </HeardList>
+        </Heard>
       </ResponsiveLayout>
       <Footer />
     </>
