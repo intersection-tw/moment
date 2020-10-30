@@ -39,31 +39,30 @@ const SongLayout = styled(ResponsiveLayout)`
 `;
 
 const SongHeader = styled.header`
-  grid-area: header;
   position: sticky;
   top: 0;
   right: 0;
   left: 0;
   margin: 0;
-  padding: 0 16px;
+  padding: 0 0 8px 0;
+  background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
+  backdrop-filter: blur(8px);
 
   @media screen and (min-width: 768px) {
-    padding: 0 0 16px 0;
+    grid-area: header;
     top: 24px;
+    background-color: unset;
+    backdrop-filter: unset;
   }
 `;
 
 const Meta = styled.section`
   font-family: ${familyDefault};
-
-  @media screen and (min-width: 768px) {
-    padding-left: 16px;
-  }
 `;
 
 const MetaTitle = styled.h1`
   display: inline-block;
-  margin: 0 8px 8px 0;
+  margin: 0 16px;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
