@@ -29,6 +29,30 @@ const SongTemplateBody = createGlobalStyle`
   }
 `;
 
+const SongLayout = styled(ResponsiveLayout)`
+  @media screen and (min-width: 768px) {
+    grid-template-areas: 
+      "header lyric"
+      ". lyric"
+      ". heard";
+  }
+`;
+
+const SongHeader = styled.header`
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 0 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 0 16px 0;
+    top: 24px;
+  }
+`;
+
 const Meta = styled.section`
   font-family: ${familyDefault};
 
@@ -117,27 +141,28 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
       />
       <GlobalStyles />
       <SongTemplateBody />
-      <ResponsiveLayout>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Link href="/" passHref>
-                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-              </Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
-                <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
-              </Link>
-            </BreadcrumbItem>
-          </BreadcrumbList>
+      <SongLayout>
+        <SongHeader>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <Link href="/" passHref>
+                  <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
+                  <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
+                </Link>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           <Meta>
             <MetaTitle>
-              {frontMatter.title}
+              {frontMatter.title}&nbsp;<Year>{frontMatter.year}</Year>
             </MetaTitle>
-            <Year>{frontMatter.year}</Year>
           </Meta>
-        </Breadcrumb>
+        </SongHeader>
         <Article>
           <MdxStyle>
             {content}
@@ -149,7 +174,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
             {heardListData}
           </HeardList>
         </Heard>
-      </ResponsiveLayout>
+      </SongLayout>
       <Footer />
     </>
   )

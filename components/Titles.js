@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
-const TitleGroup = styled.hgroup`
-  margin: 0 0 16px;
+const TitleGroup = styled.header`
+  margin: 0 0 32px;
   padding: 16px 16px 0;
   font-family: ${familyDefault};
 `;
@@ -16,7 +16,7 @@ const Title = styled.h1`
   font-weight: 500;
 `;
 
-const TitleDescription = styled.h2`
+const TitleDescription = styled.p`
   margin: 0;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xvi}%);
   font-size: 1.4rem;

@@ -75,7 +75,7 @@ export default function IndexPage({ artistData, songData }) {
       <IndexBody />
       <IndexTitleGroup>
         <Title>The Moment</Title>
-        <TitleDescription>看電影看劇時，聽到喜歡的音樂</TitleDescription>
+        <TitleDescription role="doc-subtitle">看電影看劇時，聽到喜歡的音樂</TitleDescription>
       </IndexTitleGroup>
       <MomentIndex>
       {

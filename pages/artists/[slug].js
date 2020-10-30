@@ -29,7 +29,19 @@ const ArtistBody = createGlobalStyle`
   }
 `;
 
+const ArtistLayout = styled.section`
+  max-width: 1080px;
+  margin: 0 auto;
+  /* @media screen and (min-width: 768px) {
+    grid-template-areas: 
+      "breadcrumb list"
+      ". list"
+      ". list";
+  } */
+`;
+
 const ArtistSongsList = styled(SongsList)`
+  grid-area: list;
   padding: 0 16px;
 `;
 
@@ -52,51 +64,25 @@ export default function ArtistTemplate({ frontMatter, songData }) {
       />
       <GlobalStyles />
       <ArtistBody />
-      <ResponsiveLayout>
-        {
-          isMobile() &&
-          <>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <Link href="/" passHref>
-                    <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbItem aria-label="Breadcrumb">
-                  <Link href={`/artists/${router.query.slug}`} passHref>
-                    <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
-                  </Link>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <TitleGroup>
-              <Title>{frontMatter.fullname}</Title>
-              <TitleDescription>{artistTitle}</TitleDescription>
-            </TitleGroup>
-          </>
-        }
-        {
-          !isMobile() &&
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <Link href="/" passHref>
-                  <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-                </Link>
-              </BreadcrumbItem>
-              <BreadcrumbItem aria-label="Breadcrumb">
-                <Link href={`/artists/${router.query.slug}`} passHref>
-                  <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
-                </Link>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-            <TitleGroup>
-              <Title>{frontMatter.fullname}</Title>
-              <TitleDescription>{artistTitle}</TitleDescription>
-            </TitleGroup>
-          </Breadcrumb>
-        }
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Link href="/" passHref>
+              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem aria-label="Breadcrumb">
+            <Link href={`/artists/${router.query.slug}`} passHref>
+              <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
+            </Link>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <TitleGroup>
+        <Title>{frontMatter.fullname}</Title>
+        <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>
+      </TitleGroup>
+      <ArtistLayout>
         <ArtistSongsList>
         {
           songsofArtist.map(s => {
@@ -104,8 +90,9 @@ export default function ArtistTemplate({ frontMatter, songData }) {
               <SongItem key={s.slug}>
                 <Link href={`/songs/${s.slug}`} passHref>
                   <SongLink>
-                    <SongName>{s.frontMatter.title}</SongName>
-                    <Year>{s.frontMatter.year}</Year>
+                    <SongName>
+                      {s.frontMatter.title}&nbsp;<Year>{s.frontMatter.year}</Year>
+                    </SongName>
                   </SongLink>
                 </Link>
               </SongItem>
@@ -113,7 +100,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
           })
         }
         </ArtistSongsList>
-      </ResponsiveLayout>
+      </ArtistLayout>
       <Footer />
     </>
   )
