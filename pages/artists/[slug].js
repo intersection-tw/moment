@@ -20,7 +20,7 @@ import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
 import { ResponsiveLayout } from '../../components/ResonsiveLayout';
 import { ArtistName } from '../../components/meta/ArtistName';
 import { Year } from '../../components/meta/Year';
-import { SongsList, SongItem, SongLink, SongName } from '../../components/SongsList';
+import { SongsOfArtistList, SongItem, SongLink, SongName } from '../../components/SongsList';
 import Footer from '../../components/Footer';
 
 const ArtistBody = createGlobalStyle`
@@ -29,27 +29,29 @@ const ArtistBody = createGlobalStyle`
   }
 `;
 
-const ArtistLayout = styled.section`
-  max-width: 1080px;
-  margin: 0 auto;
-  /* @media screen and (min-width: 768px) {
-    grid-template-areas: 
-      "breadcrumb list"
-      ". list"
-      ". list";
-  } */
+const ArtistBreadcrumb = styled.nav`
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  @media screen and (min-width: 768px) {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: unset;
+  }
 `;
 
-const ArtistSongsList = styled(SongsList)`
-  grid-area: list;
-  padding: 0 16px;
+const ArtistLayout = styled.section`
+  max-width: 1080px;
+  margin: 0 auto 32px;
 `;
 
 const root = process.cwd()
 
 export default function ArtistTemplate({ frontMatter, songData }) {
   const router = useRouter();
-  const artistTitle = `電視影劇裡出現過的 ${frontMatter.fullname} 歌曲`
+  const artistTitle = `出現在電視影劇裡的歌曲`
 
   const songsofArtist = songData.filter(song => {
     return song.frontMatter.artist === frontMatter.fullname
@@ -64,7 +66,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
       />
       <GlobalStyles />
       <ArtistBody />
-      <Breadcrumb>
+      <ArtistBreadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <Link href="/" passHref>
@@ -77,13 +79,13 @@ export default function ArtistTemplate({ frontMatter, songData }) {
             </Link>
           </BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
-      <TitleGroup>
-        <Title>{frontMatter.fullname}</Title>
-        <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>
-      </TitleGroup>
+      </ArtistBreadcrumb>
       <ArtistLayout>
-        <ArtistSongsList>
+        <TitleGroup>
+          <Title>{frontMatter.fullname}</Title>
+          <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>
+        </TitleGroup>
+        <SongsOfArtistList>
         {
           songsofArtist.map(s => {
             return(
@@ -99,7 +101,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
             )
           })
         }
-        </ArtistSongsList>
+        </SongsOfArtistList>
       </ArtistLayout>
       <Footer />
     </>

@@ -3,14 +3,6 @@ import styled from 'styled-components';
 import { shade, midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
-const Breadcrumb = styled.nav`
-
-  @media screen and (min-width: 768px) {
-    background-color: initial;
-    backdrop-filter: unset;
-  }
-`;
-
 const BreadcrumbList = styled.ul`
   display: flex;
   margin: 0;
@@ -45,4 +37,4 @@ const BreadcrumbItemLink = styled.a`
   text-decoration: none;
 `;
 
-export { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink };
+export { BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink };

@@ -17,7 +17,7 @@ import { Year } from '../components/meta/Year';
 import { ArtistName } from '../components/meta/ArtistName';
 
 import { LayoutSection } from '../components/Section';
-import { MomentIndex, MomentIndexItem, SongsList, SongItem, SongLink, SongName } from '../components/SongsList';
+import { MomentIndex, MomentIndexItem, SongsOfArtistList, SongItem, SongLink, SongName } from '../components/SongsList';
 import Footer from '../components/Footer';
 
 const root = process.cwd();
@@ -100,9 +100,9 @@ export default function IndexPage({ artistData, songData }) {
           return(
             <MomentIndexItem key={artist}>
               <ArtistName>{artist}</ArtistName>
-              <SongsList>
+              <SongsOfArtistList>
                 {songs}
-              </SongsList>
+              </SongsOfArtistList>
             </MomentIndexItem>
           );
         })

@@ -19,7 +19,7 @@ import { LayoutSection, LyricSection } from '../../components/Section';
 import { ResponsiveLayout } from '../../components/ResonsiveLayout';
 import { Year } from '../../components/meta/Year';
 
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import { Paragraph } from '../../components/MdxStyle';
 import Footer from '../../components/Footer';
 
@@ -55,6 +55,10 @@ const SongHeader = styled.header`
     backdrop-filter: unset;
   }
 `;
+
+// const SongBreadcrumb = styled.nav`
+
+// `;
 
 const Meta = styled.section`
   font-family: ${familyDefault};
@@ -142,7 +146,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
       <SongTemplateBody />
       <SongLayout>
         <SongHeader>
-          <Breadcrumb>
+          <nav>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <Link href="/" passHref>
@@ -155,7 +159,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
                 </Link>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </nav>
           <Meta>
             <MetaTitle>
               {frontMatter.title}&nbsp;<Year>{frontMatter.year}</Year>

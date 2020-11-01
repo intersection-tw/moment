@@ -11,35 +11,23 @@ const MomentIndex = styled.ul`
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 16px;
-  font-family: ${familyDefault};
-
-/* 
-  @media screen and (min-width: 992px) {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1080px;
-    margin: 0 auto;
-  } */
 `;
 
 const MomentIndexItem = styled.li`
-  /* grid-area: artists; */
-  /* margin: 0;
   list-style: none;
-
-  @media screen and (min-width: 992px) {
-    flex: 0 0 50%;
-    margin: 0 0 16px;
-  } */
 `;
 
-const SongsList = styled.ul`
+const SongsOfArtistList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   margin: 0 0 16px;
-  padding: 0;
+  padding: 0 16px;
+  font-family: ${familyDefault};
 
   :last-of-type {
     margin: 0;
   }
+
 `;
 
 const SongItem = styled.li`
@@ -62,4 +50,4 @@ const SongName = styled.span`
   vertical-align: baseline;
 `;
 
-export { MomentIndex, MomentIndexItem, SongsList, SongItem, SongLink, SongName };
+export { MomentIndex, MomentIndexItem, SongsOfArtistList, SongItem, SongLink, SongName };
