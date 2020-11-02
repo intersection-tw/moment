@@ -56,10 +56,6 @@ const SongHeader = styled.header`
   }
 `;
 
-// const SongBreadcrumb = styled.nav`
-
-// `;
-
 const Meta = styled.section`
   font-family: ${familyDefault};
 `;
@@ -102,8 +98,8 @@ const HeardTitle = styled.h2`
 `;
 
 const HeardList = styled.ul`
-  margin: 0;
-  padding: 0 8px;
+  margin: 0 -16px;
+  padding: 0 16px;
   font-family: ${familyDefault};
   background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
 `;

@@ -10,18 +10,24 @@ const MomentIndex = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0;
 `;
 
 const MomentIndexItem = styled.li`
+  padding: 0 16px;
   list-style: none;
+
+
+  @media screen and (min-width: 992px) {
+    padding: 0;
+  }
 `;
 
 const SongsOfArtistList = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   margin: 0 0 16px;
-  padding: 0 16px;
+  padding: 0;
   font-family: ${familyDefault};
 
   :last-of-type {

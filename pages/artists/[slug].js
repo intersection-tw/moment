@@ -17,7 +17,6 @@ import { isMobile } from '../../utils/isMobile';
 
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
-import { ResponsiveLayout } from '../../components/ResonsiveLayout';
 import { ArtistName } from '../../components/meta/ArtistName';
 import { Year } from '../../components/meta/Year';
 import { SongsOfArtistList, SongItem, SongLink, SongName } from '../../components/SongsList';
@@ -45,6 +44,7 @@ const ArtistBreadcrumb = styled.nav`
 const ArtistLayout = styled.section`
   max-width: 1080px;
   margin: 0 auto 32px;
+  padding: 0 16px;
 `;
 
 const root = process.cwd()
