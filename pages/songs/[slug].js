@@ -150,6 +150,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
                 </Link>
               </BreadcrumbItem>
               <BreadcrumbItem>
+                🤘&nbsp;
                 <Link href={`/artists/${frontMatter.artistSlug}`} passHref>
                   <BreadcrumbItemLink>{frontMatter.artist}</BreadcrumbItemLink>
                 </Link>
@@ -168,7 +169,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
           </MdxStyle>
         </Article>
         <Heard>
-          <HeardTitle>{frontMatter.title} 出現在</HeardTitle>
+          <HeardTitle>♪&nbsp;{frontMatter.title} 出現在</HeardTitle>
           <HeardList>
             {heardListData}
           </HeardList>

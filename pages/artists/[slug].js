@@ -74,6 +74,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
             </Link>
           </BreadcrumbItem>
           <BreadcrumbItem aria-label="Breadcrumb">
+            🤘&nbsp;
             <Link href={`/artists/${router.query.slug}`} passHref>
               <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
             </Link>
