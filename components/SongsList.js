@@ -33,7 +33,6 @@ const SongsOfArtistList = styled.ul`
   :last-of-type {
     margin: 0;
   }
-
 `;
 
 const SongItem = styled.li`
