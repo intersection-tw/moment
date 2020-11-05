@@ -1,6 +1,5 @@
 import { getFontDefinitionFromNetwork } from 'next/dist/next-server/server/font-utils';
 import React from 'react';
-import Image from 'next/image';
 import styled from 'styled-components';
 
 import { midnight } from '../styles/color';
@@ -19,6 +18,11 @@ const FooterContainer = styled(LayoutSection)`
   }
 `;
 
+const MomentLogo = styled.img`
+  width: 16px;
+  height: 16px;
+`;
+
 const Name = styled.h2`
   display: flex;
   font-size: 1.6rem;
@@ -32,15 +36,25 @@ const Made = styled.span`
   font-size: 1.2rem;
 `;
 
+const MapTaiwan = styled.img`
+  width: 28px;
+  height: 20px;
+  margin-right: 2px;
+  margin-left: -8px;
+  vertical-align: text-bottom;
+`;
+
 function Footer() {
   return(
     <FooterContainer as="footer">
       <Name>
-        <Image src="/favicon/favicon-32x32.png" alt="The Moment" width="16" height="16" />&nbsp;
+        <MomentLogo src="/favicon/favicon-32x32.png" alt="The Moment" />&nbsp;
         Moment 是練習作品
       </Name>
       <Description>此網站上所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</Description>
-      <Made>台灣製造</Made>
+      <Made>
+        <MapTaiwan src="/images/taiwan.svg" alt="" />臺灣製造
+      </Made>
     </FooterContainer>
   );
 }
