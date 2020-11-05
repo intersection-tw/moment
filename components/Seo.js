@@ -8,10 +8,6 @@ function Seo({slug, title, description, published, modified, artist, links}) {
   const publishedTime = new Date(published).toISOString();
   const modifiedTime = new Date(modified).toISOString();
 
-  // const indexLinks = links.map(link => {
-
-  // });
-
   return(
     <Head>
       <title>{title}</title>
