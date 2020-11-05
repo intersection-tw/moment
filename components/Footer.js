@@ -37,11 +37,12 @@ const Made = styled.span`
 `;
 
 const MapTaiwan = styled.img`
-  width: 28px;
+  width: 16px;
   height: 20px;
-  margin-right: 2px;
-  margin-left: -8px;
+  margin-right: 8px;
+  margin-left: -2px;
   vertical-align: text-bottom;
+  object-fit: cover;
 `;
 
 function Footer() {
@@ -53,7 +54,7 @@ function Footer() {
       </Name>
       <Description>此網站上所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</Description>
       <Made>
-        <MapTaiwan src="/images/taiwan.svg" alt="" />臺灣製造
+        <MapTaiwan src="/images/taiwan.png" alt="" />臺灣製造
       </Made>
     </FooterContainer>
   );
