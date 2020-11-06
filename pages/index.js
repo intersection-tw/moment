@@ -29,9 +29,12 @@ const IndexBody = createGlobalStyle`
 `;
 
 const IndexTitleGroup = styled(TitleGroup)`
+  padding: 16px 16px 0;
+
   @media screen and (min-width: 992px) {
     max-width: 1080px;
     margin: 0 auto 24px;
+    padding: 16px 0 0;
   }
 `;
 

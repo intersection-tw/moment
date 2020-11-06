@@ -7,14 +7,15 @@ import { familyDefault } from '../styles/font';
 
 import { LayoutSection } from './Section';
 
-const FooterContainer = styled(LayoutSection)`
-  padding-bottom: 32px;
+const FooterContainer = styled.footer`
+  margin: 32px 0 0;
+  padding: 0 16px 32px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
 
   @media screen and (min-width: 992px) {
     max-width: 1080px;
-    margin: 0 auto;
+    margin: 32px auto 0;
   }
 `;
 
