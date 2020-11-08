@@ -16,7 +16,7 @@ import { familyDefault } from '../../styles/font';
 
 import { isMobile } from '../../utils/isMobile';
 import { LayoutSection, LyricSection } from '../../components/Section';
-import { ResponsiveLayout } from '../../components/ResonsiveLayout';
+import { ResponsiveLayout } from '../../components/ResponsiveLayout';
 import { Year } from '../../components/meta/Year';
 
 import { BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
@@ -175,7 +175,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
             {heardListData}
           </HeardList>
         </Heard>
-        <Footer />
+        <Footer hasPadding />
       </SongLayout>
     </>
   )

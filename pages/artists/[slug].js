@@ -119,7 +119,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
           })
         }
         </SongsOfArtistList>
-        <Footer inGrid />
+        <Footer />
       </ArtistLayout>
     </>
   )

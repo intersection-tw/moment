@@ -1,17 +1,17 @@
 import { getFontDefinitionFromNetwork } from 'next/dist/next-server/server/font-utils';
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
-import { midnight } from '../styles/color';
+import { dawn, midnight } from '../styles/color';
 import { familyDefault } from '../styles/font';
 
 import { LayoutSection } from './Section';
 
 const FooterContainer = styled.footer`
-  max-width: 1080px;
   grid-area: footer;
-  margin: 32px auto 0;
-  padding: ${props => props.inGrid ? '0 0 32px' : '0 16px 32px'};
+  margin: 0;
+  padding: ${props => props.hasPadding ? '32px 16px' : '32px 0'};
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
 `;
@@ -30,7 +30,7 @@ const Description = styled.p`
   font-size: 1.2rem;
 `;
 
-const Made = styled.span`
+const Tail = styled.span`
   font-size: 1.2rem;
 `;
 
@@ -43,17 +43,34 @@ const MapTaiwan = styled.img`
   object-fit: cover;
 `;
 
+const Contact = styled.a`
+  display: inline-block;
+  margin-left: 16px;
+  padding: 0 12px;
+  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
+  text-decoration: none;
+
+  :active,
+  :focus,
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
 function Footer(props) {
   return(
-    <FooterContainer inGrid={props.inGrid}>
+    <FooterContainer hasPadding={props.hasPadding}>
       <Name>
         <MomentLogo src="/favicon/favicon-32x32.png" alt="The Moment" />&nbsp;
         Moment 是練習作品
       </Name>
       <Description>此網站上所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</Description>
-      <Made>
+      <Tail>
         <MapTaiwan src="/images/taiwan.png" alt="" />臺灣製造
-      </Made>
+        <Link href="contact" passHref>
+          <Contact>聯絡</Contact>
+        </Link>
+      </Tail>
     </FooterContainer>
   );
 }

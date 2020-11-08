@@ -111,7 +111,7 @@ export default function IndexPage({ artistData, songData }) {
         })
       }
       </MomentIndex>
-      <Footer />
+      <Footer hasPadding />
     </>
   )
 }

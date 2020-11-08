@@ -17,7 +17,6 @@ const MomentIndexItem = styled.li`
   padding: 0 16px;
   list-style: none;
 
-
   @media screen and (min-width: 992px) {
     padding: 0;
   }
