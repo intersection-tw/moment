@@ -31,10 +31,11 @@ const SongTemplateBody = createGlobalStyle`
 
 const SongLayout = styled(ResponsiveLayout)`
   @media screen and (min-width: 768px) {
-    grid-template-areas: 
+    grid-template-areas:
       "header lyric"
       ". lyric"
-      ". heard";
+      ". heard"
+      "footer footer";
   }
 `;
 
@@ -174,8 +175,8 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
             {heardListData}
           </HeardList>
         </Heard>
+        <Footer />
       </SongLayout>
-      <Footer />
     </>
   )
 }

@@ -8,15 +8,12 @@ import { familyDefault } from '../styles/font';
 import { LayoutSection } from './Section';
 
 const FooterContainer = styled.footer`
-  margin: 32px 0 0;
-  padding: 0 16px 32px;
+  max-width: 1080px;
+  grid-area: footer;
+  margin: 32px auto 0;
+  padding: ${props => props.inGrid ? '0 0 32px' : '0 16px 32px'};
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
-
-  @media screen and (min-width: 992px) {
-    max-width: 1080px;
-    margin: 32px auto 0;
-  }
 `;
 
 const MomentLogo = styled.img`
@@ -46,9 +43,9 @@ const MapTaiwan = styled.img`
   object-fit: cover;
 `;
 
-function Footer() {
+function Footer(props) {
   return(
-    <FooterContainer as="footer">
+    <FooterContainer inGrid={props.inGrid}>
       <Name>
         <MomentLogo src="/favicon/favicon-32x32.png" alt="The Moment" />&nbsp;
         Moment 是練習作品

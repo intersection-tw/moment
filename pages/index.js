@@ -58,7 +58,7 @@ export default function IndexPage({ artistData, songData }) {
       <Seo title="看電影看劇時，聽到喜歡的音樂 - Moment"
            description="讓電影、日美劇致敬的經典歌曲歌詞"
            published="2020-09-21"
-           modified="2020-09-22"
+           modified="2020-11-07"
       />
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:

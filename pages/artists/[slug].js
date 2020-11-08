@@ -23,8 +23,17 @@ import { SongsOfArtistList, SongItem, SongLink, SongName } from '../../component
 import Footer from '../../components/Footer';
 
 const ArtistBody = createGlobalStyle`
+  html,
+  body {
+    height: 100%;
+  }
+
   body {
     background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  }
+
+  #__next {
+    height: 100%;
   }
 `;
 
@@ -42,8 +51,15 @@ const ArtistBreadcrumb = styled.nav`
 `;
 
 const ArtistLayout = styled.section`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "."
+    "."
+    "footer";
   max-width: 1080px;
-  margin: 0 auto 32px;
+  min-height: calc(100% - 36px);
+  margin: 0 auto;
   padding: 0 16px;
 `;
 
@@ -103,8 +119,8 @@ export default function ArtistTemplate({ frontMatter, songData }) {
           })
         }
         </SongsOfArtistList>
+        <Footer inGrid />
       </ArtistLayout>
-      <Footer />
     </>
   )
 }
