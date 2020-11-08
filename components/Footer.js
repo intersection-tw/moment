@@ -43,19 +43,19 @@ const MapTaiwan = styled.img`
   object-fit: cover;
 `;
 
-const Contact = styled.a`
-  display: inline-block;
-  margin-left: 16px;
-  padding: 0 12px;
-  color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
-  text-decoration: none;
+// const Contact = styled.a`
+//   display: inline-block;
+//   margin-left: 16px;
+//   padding: 0 12px;
+//   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
+//   text-decoration: none;
 
-  :active,
-  :focus,
-  :hover {
-    text-decoration: underline;
-  }
-`;
+//   :active,
+//   :focus,
+//   :hover {
+//     text-decoration: underline;
+//   }
+// `;
 
 function Footer(props) {
   return(
@@ -67,9 +67,9 @@ function Footer(props) {
       <Description>此網站上所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</Description>
       <Tail>
         <MapTaiwan src="/images/taiwan.png" alt="" />臺灣製造
-        <Link href="contact" passHref>
+        {/* <Link href="contact" passHref>
           <Contact>聯絡</Contact>
-        </Link>
+        </Link> */}
       </Tail>
     </FooterContainer>
   );
