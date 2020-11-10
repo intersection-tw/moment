@@ -67,7 +67,7 @@ function Footer(props) {
       <Description>此網站上所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</Description>
       <Tail>
         <MapTaiwan src="/images/taiwan.png" alt="" />臺灣製造
-        {/* <Link href="contact" passHref>
+        {/* <Link href="/contact" passHref>
           <Contact>聯絡</Contact>
         </Link> */}
       </Tail>

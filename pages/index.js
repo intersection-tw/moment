@@ -38,6 +38,16 @@ const IndexTitleGroup = styled(TitleGroup)`
   }
 `;
 
+const IndexFooter = styled.div`
+  padding: 0 16px;
+
+  @media screen and (min-width: 992px) {
+    max-width: 1080px;
+    margin: 0 auto 24px;
+    padding: 0;
+  }
+`;
+
 export default function IndexPage({ artistData, songData }) {
   const artists = artistData.map(data => {
     return data.frontMatter.fullname
@@ -111,7 +121,9 @@ export default function IndexPage({ artistData, songData }) {
         })
       }
       </MomentIndex>
-      <Footer hasPadding />
+      <IndexFooter>
+        <Footer />
+      </IndexFooter>
     </>
   )
 }
