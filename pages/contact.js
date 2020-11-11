@@ -40,13 +40,26 @@ const MyWebsite = styled.section`
 `;
 
 const MyWebsiteTitle = styled.h2`
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   font-size: 1.6rem;
   font-weight: 400;
 `;
 
-const MyWebsiteDescription = styled.span`
+const MyWebsiteDescription = styled.p`
+  margin: 0 0 16px;
   font-size: 1.2rem;
+`;
+
+const MyWebsiteLink = styled.a`
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-size: 1.6rem;
+  text-decoration: none;
+`;
+
+const MyWebsiteLinkIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  vertical-align: bottom;
 `;
 
 export default function Contact() {
@@ -83,6 +96,12 @@ export default function Contact() {
             Moment 是 YM 的練習作品
           </MyWebsiteTitle>
           <MyWebsiteDescription>所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</MyWebsiteDescription>
+          <Link href="https://ymcheung.tw" target="_blank" rel="noopener" passHref>
+            <MyWebsiteLink>
+              個人網站&nbsp;
+              <MyWebsiteLinkIcon src="/images/externalLink.svg" alt="前往 YM 的個人網站" />
+            </MyWebsiteLink>
+          </Link>
         </MyWebsite>
       </ContactLayout>
     </>
