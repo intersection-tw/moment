@@ -50,7 +50,7 @@ const ArtistBreadcrumb = styled.nav`
   }
 `;
 
-const ArtistLayout = styled.section`
+const ArtistLayout = styled.main`
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
