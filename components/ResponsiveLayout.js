@@ -6,7 +6,7 @@ const ResponsiveLayout = styled.div`
 
   @media screen and (min-width: 768px) {
     display: grid;
-    grid-template-rows: 120px auto auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-columns: 320px 1fr;
   }
 `;

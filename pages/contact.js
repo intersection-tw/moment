@@ -96,8 +96,8 @@ export default function Contact() {
             Moment 是 YM 的練習作品
           </MyWebsiteTitle>
           <MyWebsiteDescription>所有歌詞與電影、影劇的智慧財產權皆屬於原作者。</MyWebsiteDescription>
-          <Link href="https://ymcheung.tw" target="_blank" rel="noopener" passHref>
-            <MyWebsiteLink>
+          <Link href="https://ymcheung.tw" passHref>
+            <MyWebsiteLink target="_blank" rel="noopener">
               個人網站&nbsp;
               <MyWebsiteLinkIcon src="/images/externalLink.svg" alt="前往 YM 的個人網站" />
             </MyWebsiteLink>

@@ -63,7 +63,7 @@ const Meta = styled.section`
 
 const MetaTitle = styled.h1`
   display: inline-block;
-  margin: 0 16px;
+  margin: 0 16px 8px;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
@@ -75,6 +75,45 @@ const MetaArtist = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   line-height: ${24 / 16};
+`;
+
+const Player = styled.section`
+  padding: 0 16px;
+`;
+
+const PlayerLink = styled.a`
+  display: inline-block;
+  padding: 3px 12px;
+  border: 2px solid #1ED760;
+  border-radius: 8px;
+
+  :active,
+  :hover,
+  :focus {
+    position: relative;
+
+    ::after {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '收聽';
+      color: hsl(${shade.h}, ${shade.s}%, ${shade.l.iii}%);
+      font-size: 1.6rem;
+      line-height: ${(30 / 16)};
+      text-align: center;
+      background-color: #1ED760;
+    }
+  }
+`;
+
+const PlayerLinkImage = styled.img`
+  width: 80px;
+  height: 24px;
 `;
 
 const Article = styled.article`
@@ -163,6 +202,13 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
               {frontMatter.title}&nbsp;<Year>{frontMatter.year}</Year>
             </MetaTitle>
           </Meta>
+          <Player>
+            <Link href={`https://open.spotify.com/track/${frontMatter.spotify}`} passHref>
+              <PlayerLink rel="noopener">
+                <PlayerLinkImage src="/images/spotify.png" alt="在 Spotify 收聽" />
+              </PlayerLink>
+            </Link>
+          </Player>
         </SongHeader>
         <Article>
           <MdxStyle>
