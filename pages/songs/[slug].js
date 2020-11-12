@@ -204,7 +204,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
           </Meta>
           <Player>
             <Link href={`https://open.spotify.com/track/${frontMatter.spotify}`} passHref>
-              <PlayerLink rel="noopener">
+              <PlayerLink rel="noopener nofollow">
                 <PlayerLinkImage src="/images/spotify.png" alt="在 Spotify 收聽" />
               </PlayerLink>
             </Link>
