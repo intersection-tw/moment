@@ -161,7 +161,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
 
   const content = hydrate(mdxSource, { components })
 
-  const songTitle = `${frontMatter.artist} 的 ${frontMatter.title} 歌詞`;
+  const songTitle = `${frontMatter.title} 歌詞 (${frontMatter.artist})`;
   const songDescription = `${frontMatter.year} 年發行，出現在 ${frontMatter.heard}。`;
 
   const heardListData = frontMatter.heard.split('、').map((video, index) => {
