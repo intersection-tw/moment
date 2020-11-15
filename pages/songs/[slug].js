@@ -35,6 +35,7 @@ const SongLayout = styled(ResponsiveLayout)`
       "header lyric"
       ". lyric"
       ". heard"
+      ". player"
       "footer footer";
   }
 `;
@@ -78,7 +79,9 @@ const MetaArtist = styled.div`
 `;
 
 const Player = styled.section`
+  grid-area: player;
   padding: 0 16px;
+  font-size: 0;
 `;
 
 const PlayerLink = styled.a`
@@ -129,25 +132,57 @@ const Heard = styled(LayoutSection)`
   grid-area: heard;
 `;
 
-const HeardTitle = styled.h2`
+const HeardTitle = styled.div`
   margin: 0 0 8px;
   padding: 8px 0 0;
   font-family: ${familyDefault};
+`;
+
+const HeardTitleLayout = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+`;
+
+const HeardTitleIcon = styled.div`
+  flex: 0 0 48px;
+  margin-right: 8px;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  font-size: 2.4rem;
+  line-height: ${(48 / 24)};
+  text-align: center;
+  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
+`;
+
+const HeardTitleName = styled.h2`
+  flex: 1 1 100%;
+  margin: 0;
   color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
-  font-size: 1.6rem;
+  font-size: 2rem;
+  line-height: ${( 32 / 20 )};
+  font-weight: 500;
+
+  @media screen and (min-width: 768px) {
+    padding: 8px 0;
+  }
+`;
+
+const HeardTitleTail = styled.span`
+  display: inline-block;
+  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.vii}%);
+  font-size: 1.4rem;
 `;
 
 const HeardList = styled.ul`
   margin: 0 -16px;
   padding: 0 16px;
   font-family: ${familyDefault};
-  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
 `;
 
 const HeardItem = styled.li`
   margin: 0;
   padding: 0;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.iii}%);
+  color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
   font-size: 1.4rem;
   line-height: ${32 / 14};
   list-style: none;
@@ -202,13 +237,6 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
               {frontMatter.title}&nbsp;<Year>{frontMatter.year}</Year>
             </MetaTitle>
           </Meta>
-          <Player>
-            <Link href={`https://open.spotify.com/track/${frontMatter.spotify}`} passHref>
-              <PlayerLink rel="noopener nofollow">
-                <PlayerLinkImage src="/images/spotify.png" alt="在 Spotify 收聽" />
-              </PlayerLink>
-            </Link>
-          </Player>
         </SongHeader>
         <Article>
           <MdxStyle>
@@ -216,11 +244,24 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
           </MdxStyle>
         </Article>
         <Heard>
-          <HeardTitle>♪&nbsp;{frontMatter.title} 出現在</HeardTitle>
+          <HeardTitle>
+            <HeardTitleLayout>
+              <HeardTitleIcon>♪</HeardTitleIcon>
+              <HeardTitleName>{frontMatter.title}</HeardTitleName>
+            </HeardTitleLayout>
+            <HeardTitleTail>出現在</HeardTitleTail>
+          </HeardTitle>
           <HeardList>
             {heardListData}
           </HeardList>
         </Heard>
+        <Player>
+          <Link href={`https://open.spotify.com/track/${frontMatter.spotify}`} passHref>
+            <PlayerLink rel="noopener nofollow">
+              <PlayerLinkImage src="/images/spotify.png" alt="在 Spotify 收聽" />
+            </PlayerLink>
+          </Link>
+        </Player>
         <Footer hasPadding />
       </SongLayout>
     </>
