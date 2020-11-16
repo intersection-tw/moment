@@ -38,6 +38,10 @@ const IndexLayout = styled(ResponsiveLayout)`
   }
 `;
 
+const IndexTitleGroup = styled(TitleGroup)`
+  padding-top: 16px;
+`;
+
 export default function IndexPage({ artistData, songData }) {
   const artists = artistData.map(data => {
     return data.frontMatter.fullname
@@ -77,10 +81,10 @@ export default function IndexPage({ artistData, songData }) {
       <GlobalStyles />
       <IndexBody />
       <IndexLayout>
-        <TitleGroup>
+        <IndexTitleGroup>
           <Title>The Moment</Title>
           <TitleDescription role="doc-subtitle">看電影看劇時，聽到喜歡的音樂</TitleDescription>
-        </TitleGroup>
+        </IndexTitleGroup>
         <MomentIndex>
         {
           artists.map(artist => {

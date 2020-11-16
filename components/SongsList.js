@@ -26,7 +26,9 @@ const MomentIndexItem = styled.li`
 
 const SongsOfArtistList = styled.ul`
   display: grid;
+  grid-area: list;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-content: start;
   column-gap: 16px;
   margin: 0 0 16px;
   padding: 0;

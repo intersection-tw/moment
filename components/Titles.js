@@ -5,7 +5,6 @@ import { familyDefault } from '../styles/font';
 
 const TitleGroup = styled.header`
   margin: 0 0 32px;
-  padding: 16px 0 0;
   font-family: ${familyDefault};
 `;
 

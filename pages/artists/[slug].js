@@ -43,17 +43,17 @@ const ArtistLayout = styled(ResponsiveLayout)`
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
-    "."
-    "."
-    "."
+    "breadcrumb"
+    "header"
+    "list"
     "footer";
-  max-width: 1080px;
   min-height: 100%;
 
   @media screen and (min-width: 768px) {
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
+      "breadcrumb ."
       "header list"
-      ". list"
       "footer footer";
   }
 `;
@@ -61,13 +61,17 @@ const ArtistLayout = styled(ResponsiveLayout)`
 const ArtistBreadcrumb = styled.nav`
   position: sticky;
   top: 0;
-  right: 0;
   left: 0;
 
   @media screen and (min-width: 768px) {
-    max-width: 1080px;
-    margin: 0 auto;
+    grid-area: breadcrumb;
     position: unset;
+  }
+`;
+
+const ArtistTitleGroup = styled(TitleGroup)`
+  @media screen and (min-width: 768px) {
+    grid-area: header;
   }
 `;
 
@@ -106,10 +110,10 @@ export default function ArtistTemplate({ frontMatter, songData }) {
             </BreadcrumbItem>
           </BreadcrumbList>
         </ArtistBreadcrumb>
-        <TitleGroup>
+        <ArtistTitleGroup>
           <Title>{frontMatter.fullname}</Title>
           <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>
-        </TitleGroup>
+        </ArtistTitleGroup>
         <SongsOfArtistList>
         {
           songsofArtist.map(s => {
