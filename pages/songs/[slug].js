@@ -45,7 +45,8 @@ const SongHeader = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  margin-bottom: 8px;
+  margin: 0 -16px 8px;
+  padding: 0 16px;
   background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
   backdrop-filter: blur(6px);
 
@@ -63,7 +64,7 @@ const Meta = styled.section`
 
 const MetaTitle = styled.h1`
   display: inline-block;
-  margin: 0 16px 8px;
+  margin: 0 0 8px;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
@@ -81,9 +82,8 @@ const MetaArtist = styled.div`
   line-height: ${24 / 16};
 `;
 
-const Player = styled.section`
+const Player = styled(LayoutSection)`
   grid-area: player;
-  padding: 0 16px;
   font-size: 0;
 `;
 
@@ -124,7 +124,7 @@ const PlayerLinkImage = styled.img`
 
 const Article = styled.article`
   grid-area: lyric;
-  padding: 16px 16px 0;
+  padding: 16px 0 0;
 
   @media screen and (min-width: 768px) {
     padding: 20px 16px 0;
@@ -265,7 +265,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
             </PlayerLink>
           </Link>
         </Player>
-        <Footer hasPadding />
+        <Footer />
       </SongLayout>
     </>
   )

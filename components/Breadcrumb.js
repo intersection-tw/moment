@@ -6,11 +6,10 @@ import { familyDefault } from '../styles/font';
 const BreadcrumbList = styled.ul`
   display: flex;
   margin: 0;
-  padding: 0 16px;
+  padding: 0;
 
   @media screen and (min-width: 768px) {
     margin: 0 0 8px;
-    padding: 0;
   }
 `;
 

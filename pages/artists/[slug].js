@@ -15,6 +15,8 @@ import { shade, dawn, midnight } from '../../styles/color';
 import { familyDefault } from '../../styles/font';
 import { isMobile } from '../../utils/isMobile';
 
+import { ResponsiveLayout } from '../../components/ResponsiveLayout';
+
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbItemLink } from '../../components/Breadcrumb';
 import { TitleGroup, Title, TitleDescription } from '../../components/Titles';
 import { ArtistName } from '../../components/meta/ArtistName';
@@ -37,6 +39,25 @@ const ArtistBody = createGlobalStyle`
   }
 `;
 
+const ArtistLayout = styled(ResponsiveLayout)`
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    "footer";
+  max-width: 1080px;
+  min-height: 100%;
+
+  @media screen and (min-width: 768px) {
+    grid-template-areas:
+      "header list"
+      ". list"
+      "footer footer";
+  }
+`;
+
 const ArtistBreadcrumb = styled.nav`
   position: sticky;
   top: 0;
@@ -50,19 +71,6 @@ const ArtistBreadcrumb = styled.nav`
   }
 `;
 
-const ArtistLayout = styled.main`
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "."
-    "."
-    "footer";
-  max-width: 1080px;
-  min-height: calc(100% - 36px);
-  margin: 0 auto;
-  padding: 0 16px;
-`;
-
 const root = process.cwd()
 
 export default function ArtistTemplate({ frontMatter, songData }) {
@@ -74,7 +82,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
   })
   return(
     <>
-      <Seo title={`${artistTitle} - Moment`}
+      <Seo title={`${frontMatter.fullname} ${artistTitle} - Moment`}
            slug={router.query.slug}
            description=""
            published={frontMatter.published}
@@ -82,22 +90,22 @@ export default function ArtistTemplate({ frontMatter, songData }) {
       />
       <GlobalStyles />
       <ArtistBody />
-      <ArtistBreadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <Link href="/" passHref>
-              <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem aria-label="Breadcrumb">
-            🤘&nbsp;
-            <Link href={`/artists/${router.query.slug}`} passHref>
-              <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
-            </Link>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </ArtistBreadcrumb>
       <ArtistLayout>
+        <ArtistBreadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <Link href="/" passHref>
+                <BreadcrumbItemLink>Moment 首頁 &gt;</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem aria-label="Breadcrumb">
+              🤘&nbsp;
+              <Link href={`/artists/${router.query.slug}`} passHref>
+                <BreadcrumbItemLink aria-current="page">{frontMatter.fullname}</BreadcrumbItemLink>
+              </Link>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </ArtistBreadcrumb>
         <TitleGroup>
           <Title>{frontMatter.fullname}</Title>
           <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>

@@ -3,7 +3,6 @@ import { midnight } from '../styles/color';
 
 const LayoutSection = styled.section`
   margin: 0 0 32px;
-  padding: 0 16px;
 `;
 
 const LyricSection = styled.div`

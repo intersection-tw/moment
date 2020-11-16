@@ -30,14 +30,11 @@ const IndexBody = createGlobalStyle`
 `;
 
 const IndexLayout = styled(ResponsiveLayout)`
-  padding: 0 16px;
-
   @media screen and (min-width: 768px) {
     grid-template-areas:
       "header list"
       ". list"
       "footer footer";
-    padding: 0;
   }
 `;
 

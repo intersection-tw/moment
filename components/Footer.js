@@ -11,7 +11,7 @@ import { LayoutSection } from './Section';
 const FooterContainer = styled.footer`
   grid-area: footer;
   margin: 0;
-  padding: ${props => props.hasPadding ? '32px 16px' : '32px 0'};
+  padding: 0 0 32px;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
 `;
@@ -57,9 +57,9 @@ const Contact = styled.a`
   }
 `;
 
-function Footer(props) {
+function Footer() {
   return(
-    <FooterContainer hasPadding={props.hasPadding}>
+    <FooterContainer>
       <Name>
         <MomentLogo src="/favicon/favicon-32x32.png" alt="The Moment" />&nbsp;
         Moment 是練習作品
