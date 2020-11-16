@@ -45,14 +45,13 @@ const SongHeader = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  margin: 0;
-  padding: 0 0 8px 0;
+  margin-bottom: 8px;
   background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
 
   @media screen and (min-width: 768px) {
     grid-area: header;
-    top: 24px;
+    top: 6px;
     background-color: unset;
     backdrop-filter: unset;
   }
@@ -69,6 +68,10 @@ const MetaTitle = styled.h1`
   font-size: 2.8rem;
   font-weight: 500;
   line-height: ${36 / 28};
+
+  @media screen and (min-width: 768px) {
+    margin: 0 0 8px;
+  }
 `;
 
 const MetaArtist = styled.div`
@@ -124,7 +127,7 @@ const Article = styled.article`
   padding: 16px 16px 0;
 
   @media screen and (min-width: 768px) {
-    padding: 32px 16px 0;
+    padding: 20px 16px 0;
   }
 `;
 
@@ -147,11 +150,11 @@ const HeardTitleLayout = styled.div`
 const HeardTitleIcon = styled.div`
   flex: 0 0 48px;
   margin-right: 8px;
-  color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.i}%);
+  color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
   font-size: 2.4rem;
   line-height: ${(48 / 24)};
   text-align: center;
-  background-color: hsl(${shade.h}, ${shade.s}%, ${shade.l.x}%);
+  background-color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.iii}%);
 `;
 
 const HeardTitleName = styled.h2`

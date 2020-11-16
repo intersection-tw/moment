@@ -10,18 +10,17 @@ const BreadcrumbList = styled.ul`
 
   @media screen and (min-width: 768px) {
     margin: 0 0 8px;
-    background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
-    backdrop-filter: blur(8px);
+    padding: 0;
   }
 `;
 
 const BreadcrumbItem = styled.li`
   margin: 0;
-  padding: 2px 0;
+  padding: 0;
   color: hsl(${midnight.h}, ${midnight.s}%, ${midnight.l.xi}%);
   font-family: ${familyDefault};
   font-size: 1.4rem;
-  line-height: ${32 / 14};
+  line-height: ${50 / 14};
   list-style: none;
 
   @media screen and (min-width: 768px) {

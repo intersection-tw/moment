@@ -20,6 +20,7 @@ export const midnight = {
   l: {
     i: 16,
     iii: 32,
+    iii: 45,
     vii: 56,
     xi: 80,
     xvi: 92

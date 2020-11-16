@@ -12,6 +12,7 @@ import { familyDefault } from '../styles/font';
 
 import { isMobile } from '../utils/isMobile';
 
+import { ResponsiveLayout } from '../components/ResponsiveLayout';
 import { TitleGroup, Title, TitleDescription } from '../components/Titles';
 import { Year } from '../components/meta/Year';
 import { ArtistName } from '../components/meta/ArtistName';
@@ -28,22 +29,14 @@ const IndexBody = createGlobalStyle`
   }
 `;
 
-const IndexTitleGroup = styled(TitleGroup)`
-  padding: 16px 16px 0;
-
-  @media screen and (min-width: 992px) {
-    max-width: 1080px;
-    margin: 0 auto 24px;
-    padding: 16px 0 0;
-  }
-`;
-
-const IndexFooter = styled.div`
+const IndexLayout = styled(ResponsiveLayout)`
   padding: 0 16px;
 
-  @media screen and (min-width: 992px) {
-    max-width: 1080px;
-    margin: 0 auto 24px;
+  @media screen and (min-width: 768px) {
+    grid-template-areas:
+      "header list"
+      ". list"
+      "footer footer";
     padding: 0;
   }
 `;
@@ -68,7 +61,7 @@ export default function IndexPage({ artistData, songData }) {
       <Seo title="看電影看劇時，聽到喜歡的音樂 - Moment"
            description="讓電影、日美劇致敬的經典歌曲歌詞"
            published="2020-09-21"
-           modified="2020-11-07"
+           modified="2020-11-15"
       />
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:
@@ -86,44 +79,46 @@ export default function IndexPage({ artistData, songData }) {
       </Head>
       <GlobalStyles />
       <IndexBody />
-      <IndexTitleGroup>
-        <Title>The Moment</Title>
-        <TitleDescription role="doc-subtitle">看電影看劇時，聽到喜歡的音樂</TitleDescription>
-      </IndexTitleGroup>
-      <MomentIndex>
-      {
-        artists.map(artist => {
-          const songsofArtist = songData.filter(song => {
-            return song.frontMatter.artist === artist
-          })
-          
-          const songs = songsofArtist.map(s => {
-            return(
-              <SongItem key={s.slug}>
-                <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
-                  <SongLink>
-                    <SongName>{s.frontMatter.title}</SongName>
-                    <Year>{s.frontMatter.year}</Year>
-                  </SongLink>
-                </Link>
-              </SongItem>
-            );
-          });
+      <IndexLayout>
+        <TitleGroup>
+          <Title>The Moment</Title>
+          <TitleDescription role="doc-subtitle">看電影看劇時，聽到喜歡的音樂</TitleDescription>
+        </TitleGroup>
+        <MomentIndex>
+        {
+          artists.map(artist => {
+            const songsofArtist = songData.filter(song => {
+              return song.frontMatter.artist === artist
+            })
+            
+            const songs = songsofArtist.map(s => {
+              return(
+                <SongItem key={s.slug}>
+                  <Link href="/songs/[slug]" as={`/songs/${s.slug}`} passHref>
+                    <SongLink>
+                      <SongName>
+                        {s.frontMatter.title}&nbsp;
+                        <Year>{s.frontMatter.year}</Year>
+                      </SongName>
+                    </SongLink>
+                  </Link>
+                </SongItem>
+              );
+            });
 
-          return(
-            <MomentIndexItem key={artist}>
-              <ArtistName>{artist}</ArtistName>
-              <SongsOfArtistList>
-                {songs}
-              </SongsOfArtistList>
-            </MomentIndexItem>
-          );
-        })
-      }
-      </MomentIndex>
-      <IndexFooter>
+            return(
+              <MomentIndexItem key={artist}>
+                <ArtistName>{artist}</ArtistName>
+                <SongsOfArtistList>
+                  {songs}
+                </SongsOfArtistList>
+              </MomentIndexItem>
+            );
+          })
+        }
+        </MomentIndex>
         <Footer />
-      </IndexFooter>
+      </IndexLayout>
     </>
   )
 }
