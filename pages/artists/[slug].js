@@ -60,12 +60,11 @@ const ArtistLayout = styled(ResponsiveLayout)`
 
 const ArtistBreadcrumb = styled.nav`
   position: sticky;
-  top: 0;
+  top: 6px;
   left: 0;
 
   @media screen and (min-width: 768px) {
     grid-area: breadcrumb;
-    position: unset;
   }
 `;
 
