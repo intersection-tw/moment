@@ -78,16 +78,21 @@ const root = process.cwd()
 
 export default function ArtistTemplate({ frontMatter, songData }) {
   const router = useRouter();
-  const artistTitle = `出現在電視影劇裡的歌曲`
+  const artistTitle = `${frontMatter.fullname} 出現在電視影劇裡的歌曲`;
 
-  const songsofArtist = songData.filter(song => {
+  const songsOfArtist = songData.filter(song => {
     return song.frontMatter.artist === frontMatter.fullname
   })
+
+  const songsOfArtistDescription = songsOfArtist.map(song => {
+    return song.frontMatter.title;
+  });
+
   return(
     <>
-      <Seo title={`${frontMatter.fullname} ${artistTitle} - Moment`}
+      <Seo title={`${artistTitle} - Moment`}
            slug={router.query.slug}
-           description=""
+           description={`${frontMatter.fullname} 的 ${songsOfArtistDescription.join('、')} 歌詞`}
            published={frontMatter.published}
            modified={frontMatter.modified}
       />
@@ -115,7 +120,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
         </ArtistTitleGroup>
         <SongsOfArtistList>
         {
-          songsofArtist.map(s => {
+          songsOfArtist.map(s => {
             return(
               <SongItem key={s.slug}>
                 <Link href={`/songs/${s.slug}`} passHref>
