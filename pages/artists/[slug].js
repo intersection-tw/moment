@@ -55,6 +55,7 @@ const ArtistLayout = styled(ResponsiveLayout)`
       "breadcrumb ."
       "header list"
       "footer footer";
+    column-gap: 16px;
   }
 `;
 

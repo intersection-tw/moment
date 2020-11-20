@@ -37,6 +37,7 @@ const SongLayout = styled(ResponsiveLayout)`
       ". heard"
       ". player"
       "footer footer";
+    column-gap: 16px;
   }
 `;
 
@@ -53,6 +54,8 @@ const SongHeader = styled.header`
   @media screen and (min-width: 768px) {
     grid-area: header;
     top: 6px;
+    margin: 0 0 8px;
+    padding: 0;
     background-color: unset;
     backdrop-filter: unset;
   }
@@ -127,7 +130,7 @@ const Article = styled.article`
   padding: 16px 0 0;
 
   @media screen and (min-width: 768px) {
-    padding: 20px 16px 0;
+    padding: 72px 0 0;
   }
 `;
 
