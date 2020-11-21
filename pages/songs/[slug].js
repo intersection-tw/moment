@@ -48,8 +48,7 @@ const SongHeader = styled.header`
   left: 0;
   margin: 0 -16px 8px;
   padding: 0 16px;
-  background-color: hsla(${shade.h}, ${shade.s}%, ${shade.l.iii}%, 0.8);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(20px);
 
   @media screen and (min-width: 768px) {
     grid-area: header;
@@ -130,7 +129,7 @@ const Article = styled.article`
   padding: 16px 0 0;
 
   @media screen and (min-width: 768px) {
-    padding: 72px 0 0;
+    padding: 68px 0 0;
   }
 `;
 
