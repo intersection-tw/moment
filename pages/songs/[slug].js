@@ -46,8 +46,8 @@ const SongHeader = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  margin: 0 -16px 8px;
-  padding: 0 16px;
+  margin: 0 -16px;
+  padding: 0 16px 8px;
   backdrop-filter: blur(20px);
 
   @media screen and (min-width: 768px) {
@@ -60,21 +60,20 @@ const SongHeader = styled.header`
   }
 `;
 
+const BreadcrumbNav = styled.nav`
+  margin-bottom: 8px;
+`;
+
 const Meta = styled.section`
   font-family: ${familyDefault};
 `;
 
 const MetaTitle = styled.h1`
-  display: inline-block;
-  margin: 0 0 8px;
+  margin: 0;
   color: hsl(${dawn.h}, ${dawn.s}%, ${dawn.l}%);
   font-size: 2.8rem;
   font-weight: 500;
   line-height: ${36 / 28};
-
-  @media screen and (min-width: 768px) {
-    margin: 0 0 8px;
-  }
 `;
 
 const MetaArtist = styled.div`
@@ -126,7 +125,7 @@ const PlayerLinkImage = styled.img`
 
 const Article = styled.article`
   grid-area: lyric;
-  padding: 16px 0 0;
+  padding: 8px 0 0;
 
   @media screen and (min-width: 768px) {
     padding: 68px 0 0;
@@ -222,7 +221,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
       <SongTemplateBody />
       <SongLayout>
         <SongHeader>
-          <nav>
+          <BreadcrumbNav>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <Link href="/" passHref>
@@ -236,7 +235,7 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
                 </Link>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </nav>
+          </BreadcrumbNav>
           <Meta>
             <MetaTitle>
               {frontMatter.title}&nbsp;<Year>{frontMatter.year}</Year>

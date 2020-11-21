@@ -61,8 +61,9 @@ const ArtistLayout = styled(ResponsiveLayout)`
 
 const ArtistBreadcrumb = styled.nav`
   position: sticky;
-  top: 6px;
+  top: 0;
   left: 0;
+  margin-bottom: 8px;
 
   @media screen and (min-width: 768px) {
     grid-area: breadcrumb;
@@ -117,7 +118,7 @@ export default function ArtistTemplate({ frontMatter, songData }) {
         </ArtistBreadcrumb>
         <ArtistTitleGroup>
           <Title>{frontMatter.fullname}</Title>
-          <TitleDescription role="doc-subtitle">{artistTitle}</TitleDescription>
+          <TitleDescription role="doc-subtitle">出現在電視影劇裡的歌曲</TitleDescription>
         </ArtistTitleGroup>
         <SongsOfArtistList>
         {
