@@ -127,7 +127,7 @@ const Article = styled.article`
   padding: 8px 0 0;
 
   @media screen and (min-width: 768px) {
-    padding: 68px 0 0;
+    padding: 64px 0 0;
   }
 `;
 
