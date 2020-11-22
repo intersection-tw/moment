@@ -7,10 +7,10 @@ const BreadcrumbList = styled.ul`
   display: flex;
   margin: 0;
   padding: 0;
-
+/* 
   @media screen and (min-width: 768px) {
     margin: 0 0 8px;
-  }
+  } */
 `;
 
 const BreadcrumbItem = styled.li`

@@ -52,7 +52,6 @@ const SongHeader = styled.header`
 
   @media screen and (min-width: 768px) {
     grid-area: header;
-    top: 6px;
     margin: 0 0 8px;
     padding: 0;
     background-color: unset;
@@ -211,11 +210,15 @@ export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
 
   return (
     <>
-      <Seo title={`${songTitle} - Moment`}
+      <Seo title={songTitle}
+           songName={frontMatter.title}
            slug={router.query.slug}
            description={songDescription}
            published={frontMatter.published}
            modified={frontMatter.modified}
+           hasBreadcrumb
+           artist={frontMatter.artist}
+           artistSlug={frontMatter.artistSlug}
       />
       <GlobalStyles />
       <SongTemplateBody />
@@ -286,8 +289,7 @@ export async function getStaticProps({ params }) {
   const artistData = fs.readdirSync(artistsRoot).map((p) => {
     const content = fs.readFileSync(path.join(artistsRoot, p), 'utf8');
     return {
-      slug: p.replace(/\.mdx/, ''),
-      frontMatter: matter(content).data,
+      slug: p.replace(/\.mdx/, '')
     }
   })
 
