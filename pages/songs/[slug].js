@@ -16,6 +16,7 @@ import { familyDefault } from '../../styles/font';
 
 import { isMobile } from '../../utils/isMobile';
 import { LayoutSection, LyricSection } from '../../components/Section';
+import { Speak } from '../../components/Indicator';
 import { ResponsiveLayout } from '../../components/ResponsiveLayout';
 import { Year } from '../../components/meta/Year';
 
@@ -192,7 +193,7 @@ const HeardItem = styled.li`
 `;
 
 const root = process.cwd();
-const components = { LyricSection, Paragraph };
+const components = { LyricSection, Paragraph, Speak };
 
 export default function SongTemplate({ artistData, mdxSource, frontMatter }) {
   const router = useRouter();

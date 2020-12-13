@@ -1,4 +1,3 @@
-// import Head from 'next/head';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalHtmlBody = createGlobalStyle`

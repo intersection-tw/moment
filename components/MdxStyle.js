@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { familyDefault } from '../styles/font';
 
 import { LyricSection } from './Section';
+import { Speak } from './Indicator';
 
 const Paragraph = styled.p`
   margin: 0 0 10px;
@@ -19,7 +20,8 @@ function MdxStyle({ children }) {
     <MDXProvider
       components={{
         p: (props) => <Paragraph {...props} />,
-        LyricSection: (props) => <LyricSection {...props} />
+        LyricSection: (props) => <LyricSection {...props} />,
+        Speak: (props) => <Speak {...props} />
     }}>
       {children}
     </MDXProvider>
