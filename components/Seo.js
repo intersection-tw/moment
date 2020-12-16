@@ -18,10 +18,6 @@ function Seo({slug, songName, title, description, published, modified, hasBreadc
         'position': 1,
         'name': artist,
         'item': `${process.env.NEXT_PUBLIC_HOSTNAME}/artists/${artistSlug}`
-      },{
-        '@type': 'ListItem',
-        'position': 2,
-        'name': songName
       }
     ]
   } : '';
