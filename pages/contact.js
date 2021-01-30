@@ -20,6 +20,7 @@ const ContactBreadcrumb = styled.nav`
   top: 0;
   right: 0;
   left: 0;
+  padding: 0 16px;
 
   @media screen and (min-width: 768px) {
     max-width: 1080px;
